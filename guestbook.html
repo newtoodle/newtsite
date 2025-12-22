@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guestbook — Newt</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Spectral:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head>
+<body>
+<header class="site-header"><div class="brand"><a href="index.html"><img src="assets/logo.PNG" alt="Newt logo" class="logo"></a></div><nav class="main-nav"><a href="index.html">Home</a><a href="gallery.html">Memories</a><a href="updates.html">Daily Updates</a><a href="faq.html">FAQ</a><a href="skills.html">Puppy Stats</a><a href="buy.html">Support Me</a><a href="guestbook.html">Guestbook</a></nav></header>
+<main class="contact card">
+  <h2>Newt's Guestbook</h2>
+  <p style="margin-bottom:18px;">Thanks for visiting Newt's website! You can leave a message (and a drawing) below. We will make sure Newt gets them.</p>
+  
+  <section class="card" style="margin-bottom:20px;">
+    <h3>Sign the Guestbook</h3>
+    <form id="guestbook-form">
+      <label>Name<br><input name="name" required></label>
+      <label>Message<br><textarea name="message" rows="3" required placeholder="Share your thoughts, advice, or compliments..."></textarea></label>
+      
+      <div style="margin-top:12px;">
+        <label style="display:block;margin-bottom:8px;">Draw Something (optional)</label>
+        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center;">
+          <button type="button" id="pen-black" class="btn" style="background:#333;padding:6px 12px;">Black</button>
+          <button type="button" id="pen-red" class="btn" style="background:#c0392b;padding:6px 12px;">Red</button>
+          <button type="button" id="pen-blue" class="btn" style="background:#2980b9;padding:6px 12px;">Blue</button>
+          <input type="color" id="color-picker" value="#000000" style="width:50px;height:38px;border:1px solid var(--border);border-radius:8px;cursor:pointer;" title="Pick a color">
+          <select id="pen-size" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;">
+            <option value="2">Thin</option>
+            <option value="4" selected>Medium</option>
+            <option value="8">Thick</option>
+            <option value="12">Extra Thick</option>
+          </select>
+          <button type="button" id="clear-canvas" class="btn" style="padding:6px 12px;">Clear</button>
+        </div>
+        <canvas id="drawing-canvas" width="400" height="200" style="border:2px solid var(--border);border-radius:8px;background:#fff;display:block;max-width:100%;cursor:crosshair;touch-action:none;"></canvas>
+      </div>
+      
+      <p style="margin-top:14px;"><button class="btn" type="submit">Sign Guestbook</button></p>
+    </form>
+  </section>
+
+  <section class="card">
+    <h3>Messages</h3>
+    <div id="guestbook-list"></div>
+  </section>
+</main>
+<footer class="site-footer"><small>© 2025 Newt</small></footer>
+<script src="script.js"></script>
+</body></html>

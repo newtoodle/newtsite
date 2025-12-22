@@ -1,0 +1,84 @@
+:root{
+	--bg:#f5eadf;             /* page background */
+	--card:#ffffff;            /* card background (higher contrast) */
+	--border:#e3d5c6;          /* subtle border for cards/inputs */
+	--accent:#6a8a5a;          /* primary accent */
+	--accent-2:#8b5a3c;        /* heading accent */
+	--muted:#5a4a3a;           /* body text, darker for readability */
+	--glass:rgba(255,255,255,0.85);
+}
+*{box-sizing:border-box;cursor:url('assets/newt-paw.png') 16 16, auto}
+body{font-family:Spectral,serif;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--muted);line-height:1.4}
+a{color:var(--accent-2)}
+.site-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:transparent}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{height:44px}
+h1{font-family:Cinzel,serif;margin:0;font-size:1.2rem;color:var(--accent-2)}
+#nav-toggle{display:none;border:0;background:transparent;font-size:1.4rem}
+.main-nav{display:flex;gap:12px}
+.main-nav a{padding:8px 10px;border-radius:8px;text-decoration:none;background:transparent}
+.hero{padding:36px 18px;text-align:center}
+.hero h2{font-family:Cinzel,serif;margin:0 0 8px;font-size:2rem;color:var(--accent-2)}
+.subtitle{margin:0 auto 18px;color:#5b4d3f;max-width:600px;text-align:center}
+.status-dot{display:inline-block;width:8px;height:8px;background:#10b981;border-radius:50%;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.age-clock{font-weight:600;background:var(--card);display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid var(--border);box-shadow:0 10px 24px rgba(85,60,45,0.12)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:18px}
+.card{background:var(--card);padding:14px;border-radius:12px;border:1px solid var(--border);box-shadow:0 10px 24px rgba(85,60,45,0.12)}
+.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;display:inline-block}
+.btn:hover{filter:brightness(0.95)}
+.contact{max-width:720px;margin:18px auto}
+label{display:block;margin-bottom:8px}
+input,textarea{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--glass)}
+.site-footer{text-align:center;padding:18px;color:#918476}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:40}
+.update-block{background:var(--card);padding:14px;border-radius:12px;margin-bottom:12px;border:1px solid var(--border);box-shadow:0 8px 20px rgba(85,60,45,0.12);}
+.skill-container{display:flex;justify-content:flex-start;align-items:flex-start;margin-top:20px}
+.skill-tree{list-style:none;padding:40px;margin:0;font-size:1.2rem;display:flex;flex-wrap:wrap;justify-content:space-between}
+.caret{cursor:pointer;user-select:none}
+.caret::before{content:"▶ ";color:var(--accent)}
+.caret-down::before{content:"▼ "}
+.nested{display:none}
+.nested.active{display:block;margin-left:0;padding-left:60px}
+label{display:inline-block;vertical-align:middle}
+input[type=checkbox]{vertical-align:middle;margin-left:40px;position:relative;top:5px}
+.skill-tree li{flex:0 0 48%;margin-bottom:5px}
+
+/* Skills page wider container so long labels stay on one line */
+.skill-card{max-width:1100px;margin:18px auto}
+/* Prevent wrapping of skill text + checkbox */
+.skill-tree label{white-space:nowrap}
+
+/* Skill tree inline alignment overrides */
+.skill-tree label{display:inline-flex;align-items:center;gap:6px}
+.skill-tree input[type=checkbox]{margin:0;position:static;vertical-align:middle}
+
+/* Subtle meta text (timestamps, etc.) */
+.meta{color:#8a7a68;font-size:0.9rem;margin:4px 0}
+
+/* Puppy Stats page: stat cards */
+.stat-card{margin-top:20px}
+.stat-value{font-size:1.4rem;font-weight:600;color:var(--accent-2);margin:10px 0}
+.weight-section{padding:6px 0}
+.weight-section ul{padding-left:20px;margin:8px 0}
+.weight-section li{margin-bottom:4px;font-size:0.95rem}
+
+/* Timeline (gallery milestones) */
+.timeline{position:relative;padding:20px 0;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:2px;background:var(--accent)}
+.timeline-entry{position:relative;margin-bottom:24px;padding-left:70px}
+.timeline-entry::before{content:'';position:absolute;left:12px;top:6px;width:24px;height:24px;background:var(--card);border:3px solid var(--accent);border-radius:50%;z-index:1}
+.timeline-date{font-size:0.85rem;color:var(--accent);font-weight:600;margin-bottom:4px}
+.timeline-content h4{margin:6px 0;color:var(--accent-2);font-size:1.1rem}
+.timeline-content p{margin:6px 0;font-size:0.95rem;color:var(--muted)}
+
+/* Milestone gallery (scrapbook style) */
+.milestone-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;padding:16px 0}
+.milestone-card{position:relative;border-radius:12px;overflow:hidden;box-shadow:0 10px 24px rgba(85,60,45,0.12)}
+.milestone-card img{display:block;width:100%;height:auto}
+.milestone-tag{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,0.7));padding:20px 14px 14px;color:#fff}
+.milestone-tag h4{margin:6px 0 4px;font-size:1rem;color:#fff}
+.milestone-date{font-size:0.75rem;color:#ddd;margin:0;font-weight:600;opacity:0.9}
+.milestone-tagline{font-size:0.85rem;margin:4px 0 0;line-height:1.3;opacity:0.95}
+
+/* Additional styles can be added below */
