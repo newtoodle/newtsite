@@ -246,12 +246,12 @@ function initPhotoOfDay(){
   const el = document.getElementById('photo-of-day');
   if(!el) return;
   const photoUrls = [
-    'assets/og-image.svg',
-    'assets/og-image.svg',
-    'assets/og-image.svg',
-    'assets/og-image.svg',
-    'assets/og-image.svg',
-    'assets/og-image.svg'
+    'assets/Newt1.jpeg',
+    'assets/Newt2.jpeg',
+    'assets/Newt3.jpeg',
+    'assets/Newt4.jpeg',
+    'assets/Newt5.jpeg',
+    'assets/Newt6.jpeg'
   ];
   const daysSinceEpoch = Math.floor(Date.now() / (1000*60*60*24));
   const photoIndex = daysSinceEpoch % photoUrls.length;
