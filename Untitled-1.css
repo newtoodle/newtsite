@@ -1,0 +1,15 @@
+/* Mobile overlay + animation */
+.nav-overlay{display:none;position:fixed;inset:0;background:rgba(14,11,8,0.35);z-index:40}
+.nav-overlay.open{display:block}
+
+/* animate dropdown */
+.main-nav{transform-origin:top right;transition:transform .22s ease,opacity .18s ease}
+.main-nav{opacity:0;transform:translateY(-6px) scaleY(.98)}
+.main-nav.open{opacity:1;transform:translateY(0) scaleY(1)}
+
+@media(max-width:799px){
+  .nav-toggle{display:inline-block}
+  .main-nav{display:none;position:absolute;top:64px;right:12px;left:12px;background:var(--card);padding:1rem;border-radius:10px;box-shadow:0 10px 30px rgba(30,20,10,0.08);flex-direction:column}
+  .main-nav.open{display:flex}
+  .main-nav a{margin:0;padding:.5rem 0}
+}

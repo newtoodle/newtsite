@@ -73,6 +73,14 @@ function initUpdates(){
       const list = loadUpdates(); list.push({t:Date.now(), text}); saveUpdates(list); form.reset(); renderUpdates();
     });
   }
+  // Seed a first post if none exist
+  try{
+    const existing = loadUpdates();
+    if(!existing || existing.length === 0){
+      existing.push({ t: new Date(2025,10,15).getTime(), text: '<strong>Welcome to our Life</strong><br/>The day we got Newt. Taking him back from Utah now!' });
+      saveUpdates(existing);
+    }
+  }catch(e){ /* ignore */ }
   renderUpdates();
 }
 
@@ -381,7 +389,4 @@ function initGuestbook(){
   });
   
   renderGuestbook();
-}let updates = JSON.parse(localStorage.getItem('newt_updates_v1') || '[]');
-updates = updates.filter(u => u.text !== 'newt');
-localStorage.setItem('newt_updates_v1', JSON.stringify(updates));
-location.reload();
+}
