@@ -21,25 +21,125 @@
     <h3>Sign the Guestbook</h3>
     <form id="guestbook-form">
       <label>Name<br><input name="name" required></label>
-      <label>Message<br><textarea name="message" rows="3" required placeholder="Share your thoughts, advice, or compliments..."></textarea></label>
+      <label>Message (max 750 characters)<br><textarea name="message" rows="3" required placeholder="Share your thoughts, advice, or compliments..." maxlength="750"></textarea></label>
       
       <div style="margin-top:12px;">
-        <label style="display:block;margin-bottom:8px;">Draw Something (optional)</label>
-        <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:center;">
-          <button type="button" id="pen-black" class="btn" style="background:#333;padding:6px 12px;">Black</button>
-          <button type="button" id="pen-red" class="btn" style="background:#c0392b;padding:6px 12px;">Red</button>
-          <button type="button" id="pen-blue" class="btn" style="background:#2980b9;padding:6px 12px;">Blue</button>
-          <input type="color" id="color-picker" value="#000000" style="width:50px;height:38px;border:1px solid var(--border);border-radius:8px;cursor:pointer;" title="Pick a color">
-          <button type="button" id="eraser" class="btn" style="padding:6px 12px;">Eraser</button>
-          <select id="pen-size" style="padding:6px 12px;border:1px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;">
-            <option value="2">Thin</option>
-            <option value="4" selected>Medium</option>
-            <option value="8">Thick</option>
-            <option value="12">Extra Thick</option>
-          </select>
-          <button type="button" id="clear-canvas" class="btn" style="padding:6px 12px;">Clear</button>
+        <label style="display:block;margin-bottom:8px;font-weight:600;">Draw Something (optional)</label>
+        
+        <!-- MS Paint Style Toolbar -->
+        <div style="background:#f0f0f0;border:2px solid #ccc;padding:8px;border-radius:4px;margin-bottom:8px;">
+          <!-- Tools Row -->
+          <div style="display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap;">
+            <button type="button" class="paint-tool active" data-tool="pencil" title="Pencil" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">✏️</button>
+            <button type="button" class="paint-tool" data-tool="brush" title="Brush" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">🖌️</button>
+            <button type="button" class="paint-tool" data-tool="eraser" title="Eraser" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;padding:4px;"><img src="assets/eraser.png" style="width:100%;height:100%;object-fit:contain;"></button>
+            <button type="button" class="paint-tool" data-tool="fill" title="Fill Bucket" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">🪣</button>
+            <div style="width:2px;height:40px;background:#999;margin:0 4px;"></div>
+            <button type="button" class="paint-tool" data-tool="line" title="Line" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">—</button>
+            <button type="button" class="paint-tool" data-tool="rectangle" title="Rectangle" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">▭</button>
+            <button type="button" class="paint-tool" data-tool="circle" title="Circle" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">○</button>
+            <button type="button" class="paint-tool" data-tool="spray" title="Spray Paint" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;padding:4px;"><img src="assets/spray.png" style="width:100%;height:100%;object-fit:contain;"></button>
+            <div style="width:2px;height:40px;background:#999;margin:0 4px;"></div>
+            <button type="button" id="undo-btn" title="Undo" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">↶</button>
+            <button type="button" id="redo-btn" title="Redo" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">↷</button>
+            <button type="button" id="clear-canvas" title="Clear All" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">🗑️</button>
+          </div>
+          
+          <!-- Size and Fill Options -->
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
+            <div>
+              <label style="font-size:12px;display:block;margin-bottom:2px;">Size:</label>
+              <select id="pen-size" style="padding:4px 8px;border:1px solid #999;background:#fff;cursor:pointer;">
+                <option value="1">1px</option>
+                <option value="2">2px</option>
+                <option value="3">3px</option>
+                <option value="5" selected>5px</option>
+                <option value="8">8px</option>
+                <option value="10">10px</option>
+                <option value="15">15px</option>
+                <option value="20">20px</option>
+                <option value="30">30px</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:12px;display:block;margin-bottom:2px;">Opacity:</label>
+              <select id="pen-opacity" style="padding:4px 8px;border:1px solid #999;background:#fff;cursor:pointer;">
+                <option value="1" selected>100%</option>
+                <option value="0.9">90%</option>
+                <option value="0.8">80%</option>
+                <option value="0.7">70%</option>
+                <option value="0.6">60%</option>
+                <option value="0.5">50%</option>
+                <option value="0.4">40%</option>
+                <option value="0.3">30%</option>
+                <option value="0.2">20%</option>
+                <option value="0.1">10%</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:12px;display:block;margin-bottom:2px;">Spray:</label>
+              <select id="spray-settings" style="padding:4px 8px;border:1px solid #999;background:#fff;cursor:pointer;">
+                <option value="fine">Fine</option>
+                <option value="normal" selected>Normal</option>
+                <option value="wide">Wide</option>
+                <option value="fuzzy">Fuzzy</option>
+                <option value="dense">Dense</option>
+              </select>
+            </div>
+            <div>
+              <label style="font-size:12px;display:block;margin-bottom:2px;">
+                <input type="checkbox" id="fill-shape"> Fill Shape
+              </label>
+            </div>
+          </div>
+          
+          <!-- Color Palette -->
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="display:flex;align-items:center;gap:4px;">
+              <div style="text-align:center;">
+                <div style="font-size:10px;margin-bottom:2px;">Primary</div>
+                <div id="primary-color-display" style="width:30px;height:30px;border:2px solid #000;background:#000;"></div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:10px;margin-bottom:2px;">Secondary</div>
+                <div id="secondary-color-display" style="width:30px;height:30px;border:2px solid #000;background:#fff;"></div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(14, 20px);gap:2px;">
+              <div class="color-swatch" data-color="#000000" style="width:20px;height:20px;background:#000000;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#808080" style="width:20px;height:20px;background:#808080;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#800000" style="width:20px;height:20px;background:#800000;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ff0000" style="width:20px;height:20px;background:#ff0000;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#808000" style="width:20px;height:20px;background:#808000;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ffff00" style="width:20px;height:20px;background:#ffff00;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#008000" style="width:20px;height:20px;background:#008000;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#00ff00" style="width:20px;height:20px;background:#00ff00;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#008080" style="width:20px;height:20px;background:#008080;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#00ffff" style="width:20px;height:20px;background:#00ffff;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#000080" style="width:20px;height:20px;background:#000080;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#0000ff" style="width:20px;height:20px;background:#0000ff;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#800080" style="width:20px;height:20px;background:#800080;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ff00ff" style="width:20px;height:20px;background:#ff00ff;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ffffff" style="width:20px;height:20px;background:#ffffff;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#c0c0c0" style="width:20px;height:20px;background:#c0c0c0;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ff8080" style="width:20px;height:20px;background:#ff8080;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ffc0c0" style="width:20px;height:20px;background:#ffc0c0;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ffff80" style="width:20px;height:20px;background:#ffff80;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ffffc0" style="width:20px;height:20px;background:#ffffc0;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#80ff80" style="width:20px;height:20px;background:#80ff80;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#c0ffc0" style="width:20px;height:20px;background:#c0ffc0;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#80ffff" style="width:20px;height:20px;background:#80ffff;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#c0ffff" style="width:20px;height:20px;background:#c0ffff;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#8080ff" style="width:20px;height:20px;background:#8080ff;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#c0c0ff" style="width:20px;height:20px;background:#c0c0ff;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ff80ff" style="width:20px;height:20px;background:#ff80ff;border:1px solid #999;cursor:pointer;"></div>
+              <div class="color-swatch" data-color="#ffc0ff" style="width:20px;height:20px;background:#ffc0ff;border:1px solid #999;cursor:pointer;"></div>
+            </div>
+            <input type="color" id="color-picker" value="#000000" style="width:40px;height:40px;border:1px solid #999;cursor:pointer;" title="Custom color">
+          </div>
         </div>
-          <canvas id="drawing-canvas" width="800" height="400" style="border:2px solid var(--border);border-radius:8px;background:#fff;display:block;max-width:100%;cursor:crosshair;touch-action:none;"></canvas>
+        
+        <canvas id="drawing-canvas" width="800" height="400" style="border:2px solid #999;background:#fff;display:block;max-width:100%;cursor:crosshair;touch-action:none;"></canvas>
       </div>
       
       <p style="margin-top:14px;"><button class="btn" type="submit">Sign Guestbook</button></p>

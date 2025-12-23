@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Barks & Licks</title>
+</head>
+<body>
+    <h1>Testing Barks and Licks Collections</h1>
+    <button id="testBtn">Create Test Data</button>
+    <div id="status"></div>
+
+    <script src="/firebase-config.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script>
+        const cfg = window.FIREBASE_CONFIG;
+        if (!window.firebase.apps.length) {
+            window.firebase.initializeApp(cfg);
+        }
+        const db = window.firebase.firestore();
+
+        document.getElementById('testBtn').addEventListener('click', async () => {
+            const status = document.getElementById('status');
+            status.innerHTML = 'Creating test data...';
+
+            try {
+                // Create test bark
+                await db.collection('barks').add({
+                    postId: 'test-post-1',
+                    name: 'Test User',
+                    message: 'This is a test bark reply!',
+                    t: Date.now()
+                });
+
+                // Create test lick
+                await db.collection('licks').doc('test-post-1').set({
+                    count: 5
+                });
+
+                status.innerHTML = '✅ Success! Check Firebase Console:<br>' +
+                    '- barks collection should now be visible<br>' +
+                    '- licks collection should now be visible<br><br>' +
+                    '<a href="https://console.firebase.google.com/project/newt-site/firestore/databases/-default-/data/~2Fbarks" target="_blank">View barks →</a><br>' +
+                    '<a href="https://console.firebase.google.com/project/newt-site/firestore/databases/-default-/data/~2Flicks" target="_blank">View licks →</a>';
+            } catch (error) {
+                status.innerHTML = '❌ Error: ' + error.message;
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>

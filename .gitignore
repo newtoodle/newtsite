@@ -2,3 +2,7 @@
 .DS_Store
 node_modules/
 __pycache__/
+
+# Firebase and admin files (keep private!)
+service-account-key.json
+firebase-config.js

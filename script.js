@@ -171,8 +171,13 @@ function renderUpdates(){
             <span class="bark-icon">.ᐟ</span> Bark
           </button>
         </div>
+        <div class="bark-replies-list-container"></div>
       `;
       container.appendChild(el);
+      
+      // Load existing barks immediately and show them
+      const repliesContainer = el.querySelector('.bark-replies-list-container');
+      loadBarksPublic(postId, repliesContainer);
     }
     attachNewtterListeners();
   });
@@ -196,10 +201,19 @@ function attachNewtterListeners(){
           const docRef = db.collection('licks').doc(postId);
           
           if(hasLicked){
-            // Unlike - decrement
-            await docRef.set({ 
-              count: window.firebase.firestore.FieldValue.increment(-1) 
-            }, { merge: true });
+            // Unlike - decrement but never go below 0
+            const currentDoc = await docRef.get();
+            const currentCount = currentDoc.exists ? (currentDoc.data().count || 0) : 0;
+            
+            if(currentCount > 0){
+              await docRef.set({ 
+                count: window.firebase.firestore.FieldValue.increment(-1) 
+              }, { merge: true });
+            } else {
+              // Already at 0, just set to 0
+              await docRef.set({ count: 0 }, { merge: true });
+            }
+            
             localStorage.removeItem(userLickKey);
             this.classList.remove('licked');
             if(iconSpan) iconSpan.textContent = '♡';
@@ -216,6 +230,7 @@ function attachNewtterListeners(){
           // Get updated count from Firebase
           const doc = await docRef.get();
           const newCount = doc.exists ? (doc.data().count || 0) : 0;
+          console.log('Lick count updated:', postId, 'new count:', newCount);
           countSpan.textContent = Math.max(0, newCount);
         }catch(e){ 
           console.warn('Failed to update lick count in Firebase', e);
@@ -271,7 +286,7 @@ function attachNewtterListeners(){
         replySection.className = 'bark-reply-section';
         replySection.innerHTML = `
           <div class="bark-reply-form">
-            <textarea placeholder="Bark back at Newt..." rows="3" class="bark-textarea"></textarea>
+            <textarea placeholder="Bark back at Newt... (max 750 chars)" rows="3" class="bark-textarea" maxlength="750"></textarea>
             <div style="display:flex;gap:8px;margin-top:8px;">
               <input type="text" placeholder="Your name" class="bark-name" style="flex:1;">
               <button class="btn bark-submit-btn">Send Bark</button>
@@ -290,6 +305,7 @@ function attachNewtterListeners(){
           const message = replySection.querySelector('.bark-textarea').value.trim();
           const name = replySection.querySelector('.bark-name').value.trim() || 'Anonymous';
           if(!message) return;
+          if(message.length > 750){ alert('Bark too long (max 750 characters)'); return; }
           
           const bark = { postId, name, message, t: Date.now() };
           
@@ -300,6 +316,11 @@ function attachNewtterListeners(){
               await db.collection('barks').add(bark);
               replySection.querySelector('.bark-textarea').value = '';
               replySection.querySelector('.bark-name').value = '';
+              // Reload barks to show the new one
+              loadBarks(postId, replySection.querySelector('.bark-replies-list'));
+              // Also update the public display
+              const publicContainer = postBlock.querySelector('.bark-replies-list-container');
+              if(publicContainer) loadBarksPublic(postId, publicContainer);
               return;
             }catch(e){ console.warn('Cloud write failed', e); }
           }
@@ -310,6 +331,9 @@ function attachNewtterListeners(){
           list.push(bark);
           localStorage.setItem(key, JSON.stringify(list));
           loadBarks(postId, replySection.querySelector('.bark-replies-list'));
+          // Also update the public display
+          const publicContainer = postBlock.querySelector('.bark-replies-list-container');
+          if(publicContainer) loadBarksPublic(postId, publicContainer);
           replySection.querySelector('.bark-textarea').value = '';
           replySection.querySelector('.bark-name').value = '';
         });
@@ -385,7 +409,7 @@ async function loadBarks(postId, container){
   if(db){
     try{
       const snap = await db.collection('barks').where('postId','==',postId).orderBy('t','asc').get();
-      barks = snap.docs.map(d => d.data());
+      barks = snap.docs.map(d => ({...d.data(), id: d.id}));
     }catch(e){
       console.warn('Loading barks from cloud failed', e);
     }
@@ -410,7 +434,59 @@ async function loadBarks(postId, container){
       <p><strong>${bark.name}</strong> <span class="meta">${new Date(bark.t).toLocaleString()}</span></p>
       <p style="margin-top:4px;">${bark.message}</p>
     `;
+    if(bark.id){
+      barkEl.dataset.barkId = bark.id;
+    }
     container.appendChild(barkEl);
+  });
+}
+
+// Load barks publicly (always visible under posts)
+async function loadBarksPublic(postId, container){
+  if(!container) return;
+  
+  // Try Firebase first
+  const db = await ensureFirebase();
+  let barks = [];
+  
+  if(db){
+    try{
+      const snap = await db.collection('barks').where('postId','==',postId).orderBy('t','asc').get();
+      barks = snap.docs.map(d => ({...d.data(), id: d.id}));
+    }catch(e){
+      console.warn('Loading barks from cloud failed', e);
+    }
+  }
+  
+  // Fallback to localStorage
+  if(!barks.length){
+    const key = `barks_${postId}`;
+    barks = JSON.parse(localStorage.getItem(key) || '[]');
+  }
+  
+  if(barks.length === 0){
+    return; // Don't show anything if no barks
+  }
+  
+  // Create a visible replies section
+  container.innerHTML = `
+    <div class="bark-replies-public">
+      <div class="bark-replies-list"></div>
+    </div>
+  `;
+  
+  const repliesList = container.querySelector('.bark-replies-list');
+  barks.forEach(bark => {
+    const barkEl = document.createElement('div');
+    barkEl.className = 'bark-item';
+    barkEl.innerHTML = `
+      <p><strong>${bark.name}</strong> <span class="meta">${new Date(bark.t).toLocaleString()}</span></p>
+      <p style="margin-top:4px;">${bark.message}</p>
+    `;
+    if(bark.id){
+      barkEl.dataset.barkId = bark.id;
+    }
+    repliesList.appendChild(barkEl);
   });
 }
 
@@ -523,10 +599,7 @@ function initChaosButton(){
   chaosBtn.addEventListener('click', function(){
     const audio = new Audio('assets/Chaos1.mp3');
     audio.volume = 1.0;
-    audio.load();
-    setTimeout(()=>{
-      audio.play().catch(err=>console.log('Audio play failed:',err));
-    }, 50);
+    audio.play().catch(err=>console.log('Audio play failed:',err));
     const newtImages = ['assets/chaos 1.PNG','assets/Chaos2.PNG','assets/Chaos3.PNG','assets/Chaos4.PNG','assets/Chaos5.PNG','assets/logo.PNG'];
     const newtCount = Math.floor(Math.random()*11)+20;
     for(let i=0; i<newtCount; i++){
@@ -585,7 +658,7 @@ function initTreatButton(){
 
 document.addEventListener('DOMContentLoaded', ()=>{
   updateAge(); setInterval(updateAge, 1000);
-  initNav(); initContactForm(); initUpdates(); initSkillTree(); initFAQ(); initWeightConverter(); initTreatsCounter(); initStatusWidget(); initPhotoOfDay(); initNicknames(); initGuestbook(); initChaosButton(); initTreatButton();
+  initNav(); initContactForm(); initUpdates(); initSkillTree(); initFAQ(); initWeightConverter(); initTreatsCounter(); initStatusWidget(); initPhotoOfDay(); initNicknames(); initGuestbook(); initChaosButton(); initTreatButton(); initStinkLevel();
   initVisitCounter();
 });
 
@@ -631,6 +704,44 @@ async function initVisitCounter(){
       container.textContent = `Visits: ${finalCount}`;
     }
   }catch(e){ console.warn('Visit counter error', e); }
+}
+
+// Stink Level (randomized daily)
+function initStinkLevel(){
+  const elem = document.getElementById('stink-level');
+  if(!elem) return;
+  
+  const stinkLevels = [
+    { level: 'S-0', desc: 'Minor' },
+    { level: 'S-1', desc: 'Moderate' },
+    { level: 'S-2', desc: 'Significant' },
+    { level: 'S-3', desc: 'Severe' },
+    { level: 'S-4', desc: 'Devastating' },
+    { level: 'S-5', desc: 'Incredible' }
+  ];
+  
+  const today = new Date().toDateString();
+  const stored = localStorage.getItem('stink-level-data');
+  let stinkData;
+  
+  try{
+    stinkData = stored ? JSON.parse(stored) : null;
+  }catch(e){
+    stinkData = null;
+  }
+  
+  // If no data or date changed, generate new random level
+  if(!stinkData || stinkData.date !== today){
+    const randomIndex = Math.floor(Math.random() * stinkLevels.length);
+    stinkData = {
+      date: today,
+      level: randomIndex
+    };
+    localStorage.setItem('stink-level-data', JSON.stringify(stinkData));
+  }
+  
+  const current = stinkLevels[stinkData.level];
+  elem.innerHTML = `<strong>${current.level}</strong> (${current.desc})`;
 }
 
 // FAQ (localStorage-backed public list on this device)
@@ -878,77 +989,154 @@ async function initGuestbook(){
   const canvas = document.getElementById('drawing-canvas');
   const form = document.getElementById('guestbook-form');
   if(!canvas || !form) return;
-  const ctx = canvas.getContext('2d');
-  let drawing = false;
-  let currentColor = '#000';
-  let currentSize = 4;
-  let isEraser = false;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
   
-  // Set canvas size to match display
-  const rect = canvas.getBoundingClientRect();
-  // Match the larger canvas in HTML: 800x400
+  // MS Paint State
+  let drawing = false;
+  let currentTool = 'pencil';
+  let primaryColor = '#000000';
+  let secondaryColor = '#ffffff';
+  let currentSize = 5;
+  let currentOpacity = 1;
+  let fillShape = false;
+  let spraySettings = { density: 20, radius: 15 };
+  let undoStack = [];
+  let redoStack = [];
+  let startPos = null;
+  let tempCanvas = null;
+  let tempCtx = null;
+  
+  // Set canvas size
   canvas.width = 800;
   canvas.height = 400;
+  
+  // Fill with white background
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  saveState();
   
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   
-  // Color and size controls
-  const colorPicker = document.getElementById('color-picker');
-  const penSize = document.getElementById('pen-size');
+  // Create temporary canvas for shape previews
+  tempCanvas = document.createElement('canvas');
+  tempCanvas.width = canvas.width;
+  tempCanvas.height = canvas.height;
+  tempCtx = tempCanvas.getContext('2d');
   
-  function updateColor(color){
-    if(/^#[0-9A-Fa-f]{6}$/.test(color)){
-      currentColor = color;
-      isEraser = false;
-      if(colorPicker) colorPicker.value = color;
+  // Tool selection
+  document.querySelectorAll('.paint-tool').forEach(btn => {
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.paint-tool').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      currentTool = this.dataset.tool;
+      updateCursor();
+    });
+  });
+  
+  // Undo/Redo
+  document.getElementById('undo-btn')?.addEventListener('click', undo);
+  document.getElementById('redo-btn')?.addEventListener('click', redo);
+  
+  // Clear canvas
+  document.getElementById('clear-canvas')?.addEventListener('click', ()=>{
+    if(confirm('Clear entire canvas?')){
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      saveState();
+    }
+  });
+  
+  // Size selector
+  document.getElementById('pen-size')?.addEventListener('change', (e)=>{
+    currentSize = parseInt(e.target.value, 10) || 5;
+  });
+  
+  // Opacity selector
+  document.getElementById('pen-opacity')?.addEventListener('change', (e)=>{
+    currentOpacity = parseFloat(e.target.value) || 1;
+  });
+  
+  // Spray settings
+  document.getElementById('spray-settings')?.addEventListener('change', (e)=>{
+    const setting = e.target.value;
+    switch(setting){
+      case 'fine': spraySettings = { density: 10, radius: 8 }; break;
+      case 'normal': spraySettings = { density: 20, radius: 15 }; break;
+      case 'wide': spraySettings = { density: 30, radius: 25 }; break;
+      case 'fuzzy': spraySettings = { density: 50, radius: 20 }; break;
+      case 'dense': spraySettings = { density: 40, radius: 12 }; break;
+    }
+  });
+  
+  // Fill checkbox
+  document.getElementById('fill-shape')?.addEventListener('change', (e)=>{
+    fillShape = e.target.checked;
+  });
+  
+  // Color swatches
+  document.querySelectorAll('.color-swatch').forEach(swatch => {
+    swatch.addEventListener('click', function(e){
+      const color = this.dataset.color;
+      if(e.button === 2 || e.ctrlKey){
+        secondaryColor = color;
+        document.getElementById('secondary-color-display').style.background = color;
+      } else {
+        primaryColor = color;
+        document.getElementById('primary-color-display').style.background = color;
+        document.getElementById('color-picker').value = color;
+      }
+    });
+    swatch.addEventListener('contextmenu', function(e){
+      e.preventDefault();
+      const color = this.dataset.color;
+      secondaryColor = color;
+      document.getElementById('secondary-color-display').style.background = color;
+    });
+  });
+  
+  // Custom color picker
+  document.getElementById('color-picker')?.addEventListener('input', (e)=>{
+    primaryColor = e.target.value;
+    document.getElementById('primary-color-display').style.background = primaryColor;
+  });
+  
+  // Save/restore state for undo/redo
+  function saveState(){
+    if(undoStack.length >= 50) undoStack.shift();
+    undoStack.push(canvas.toDataURL());
+    redoStack = [];
+  }
+  
+  function undo(){
+    if(undoStack.length > 1){
+      redoStack.push(undoStack.pop());
+      const img = new Image();
+      img.onload = ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(img,0,0); };
+      img.src = undoStack[undoStack.length-1];
     }
   }
   
-  // Pen color buttons
-  document.getElementById('pen-black')?.addEventListener('click', ()=>updateColor('#000000'));
-  document.getElementById('pen-red')?.addEventListener('click', ()=>updateColor('#c0392b'));
-  document.getElementById('pen-blue')?.addEventListener('click', ()=>updateColor('#2980b9'));
-  
-  // Eraser button
-  document.getElementById('eraser')?.addEventListener('click', ()=>{
-    isEraser = true;
-  });
-  
-  // Color picker
-  colorPicker?.addEventListener('input', (e)=>updateColor(e.target.value));
-  
-  // Pen size
-  penSize?.addEventListener('change', (e)=>{
-    currentSize = parseInt(e.target.value, 10) || 4;
-  });
-  
-  document.getElementById('clear-canvas')?.addEventListener('click', ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height); });
-  
-  // Drawing handlers
-  function startDraw(e){
-    drawing = true;
-    const pos = getPos(e);
-    ctx.beginPath();
-    ctx.moveTo(pos.x, pos.y);
-    if(isEraser){
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.strokeStyle = 'rgba(0,0,0,1)';
-      ctx.lineWidth = currentSize * 2;
-    } else {
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.strokeStyle = currentColor;
-      ctx.lineWidth = currentSize;
+  function redo(){
+    if(redoStack.length > 0){
+      const state = redoStack.pop();
+      undoStack.push(state);
+      const img = new Image();
+      img.onload = ()=>{ ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(img,0,0); };
+      img.src = state;
     }
   }
-  function draw(e){
-    if(!drawing) return;
-    e.preventDefault();
-    const pos = getPos(e);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
+  
+  function updateCursor(){
+    const cursors = {
+      pencil: 'crosshair', brush: 'crosshair', eraser: 'cell',
+      fill: 'pointer', line: 'crosshair',
+      rectangle: 'crosshair', circle: 'crosshair', spray: 'crosshair'
+    };
+    canvas.style.cursor = cursors[currentTool] || 'crosshair';
   }
-  function endDraw(){ drawing = false; }
+  
+  // Get mouse/touch position
   function getPos(e){
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
@@ -956,11 +1144,195 @@ async function initGuestbook(){
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
     return {
-      x: (clientX - rect.left) * scaleX,
-      y: (clientY - rect.top) * scaleY
+      x: Math.floor((clientX - rect.left) * scaleX),
+      y: Math.floor((clientY - rect.top) * scaleY)
     };
   }
   
+  // Flood fill algorithm
+  function floodFill(x, y, fillColor){
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const pixels = imageData.data;
+    const targetColor = getPixelColor(pixels, x, y);
+    const fillRGB = hexToRgb(fillColor);
+    
+    if(colorsMatch(targetColor, fillRGB)) return;
+    
+    const stack = [[x, y]];
+    while(stack.length){
+      const [cx, cy] = stack.pop();
+      if(cx < 0 || cx >= canvas.width || cy < 0 || cy >= canvas.height) continue;
+      
+      const currentColor = getPixelColor(pixels, cx, cy);
+      if(!colorsMatch(currentColor, targetColor)) continue;
+      
+      setPixelColor(pixels, cx, cy, fillRGB);
+      stack.push([cx+1, cy], [cx-1, cy], [cx, cy+1], [cx, cy-1]);
+    }
+    
+    ctx.putImageData(imageData, 0, 0);
+  }
+  
+  function getPixelColor(pixels, x, y){
+    const i = (y * canvas.width + x) * 4;
+    return [pixels[i], pixels[i+1], pixels[i+2], pixels[i+3]];
+  }
+  
+  function setPixelColor(pixels, x, y, rgb){
+    const i = (y * canvas.width + x) * 4;
+    pixels[i] = rgb[0];
+    pixels[i+1] = rgb[1];
+    pixels[i+2] = rgb[2];
+    pixels[i+3] = 255;
+  }
+  
+  function colorsMatch(c1, c2){
+    return c1[0]===c2[0] && c1[1]===c2[1] && c1[2]===c2[2] && c1[3]===c2[3];
+  }
+  
+  function hexToRgb(hex){
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    return [r, g, b, 255];
+  }
+  
+  function rgbToHex(r, g, b){
+    return '#' + [r,g,b].map(x => x.toString(16).padStart(2,'0')).join('');
+  }
+  
+  // Drawing functions
+  function startDraw(e){
+    const pos = getPos(e);
+    startPos = pos;
+    drawing = true;
+    
+    if(currentTool === 'fill'){
+      floodFill(pos.x, pos.y, primaryColor);
+      saveState();
+      drawing = false;
+      return;
+    }
+    
+    if(currentTool === 'pencil' || currentTool === 'brush'){
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = currentOpacity;
+      ctx.strokeStyle = e.button === 2 || e.ctrlKey ? secondaryColor : primaryColor;
+      ctx.lineWidth = currentTool === 'brush' ? currentSize * 1.5 : currentSize;
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+    
+    if(currentTool === 'eraser'){
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.globalAlpha = currentOpacity;
+      ctx.strokeStyle = 'rgba(0,0,0,1)';
+      ctx.lineWidth = currentSize * 2;
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    }
+    
+    if(currentTool === 'spray'){
+      ctx.globalAlpha = currentOpacity;
+      sprayPaint(pos.x, pos.y);
+    }
+    
+    // For shapes, save current canvas to temp
+    if(['line', 'rectangle', 'circle'].includes(currentTool)){
+      tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+      tempCtx.drawImage(canvas, 0, 0);
+    }
+  }
+  
+  function draw(e){
+    if(!drawing) return;
+    e.preventDefault();
+    const pos = getPos(e);
+    
+    if(currentTool === 'pencil' || currentTool === 'brush'){
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+    
+    if(currentTool === 'eraser'){
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }
+    
+    if(currentTool === 'spray'){
+      sprayPaint(pos.x, pos.y);
+    }
+    
+    // Shape preview
+    if(['line', 'rectangle', 'circle'].includes(currentTool)){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(tempCanvas, 0, 0);
+      
+      ctx.globalAlpha = currentOpacity;
+      ctx.strokeStyle = primaryColor;
+      ctx.fillStyle = primaryColor;
+      ctx.lineWidth = currentSize;
+      ctx.globalCompositeOperation = 'source-over';
+      
+      if(currentTool === 'line'){
+        ctx.beginPath();
+        ctx.moveTo(startPos.x, startPos.y);
+        ctx.lineTo(pos.x, pos.y);
+        ctx.stroke();
+      }
+      
+      if(currentTool === 'rectangle'){
+        const w = pos.x - startPos.x;
+        const h = pos.y - startPos.y;
+        if(fillShape){
+          ctx.fillRect(startPos.x, startPos.y, w, h);
+        } else {
+          ctx.strokeRect(startPos.x, startPos.y, w, h);
+        }
+      }
+      
+      if(currentTool === 'circle'){
+        const rx = Math.abs(pos.x - startPos.x);
+        const ry = Math.abs(pos.y - startPos.y);
+        const cx = startPos.x + (pos.x - startPos.x) / 2;
+        const cy = startPos.y + (pos.y - startPos.y) / 2;
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, rx/2, ry/2, 0, 0, Math.PI * 2);
+        if(fillShape){
+          ctx.fill();
+        } else {
+          ctx.stroke();
+        }
+      }
+    }
+  }
+  
+  function endDraw(){
+    if(drawing){
+      drawing = false;
+      ctx.globalAlpha = 1; // Reset opacity
+      if(['pencil', 'brush', 'eraser', 'spray', 'line', 'rectangle', 'circle'].includes(currentTool)){
+        saveState();
+      }
+    }
+  }
+  
+  function sprayPaint(x, y){
+    const density = spraySettings.density;
+    const radius = spraySettings.radius;
+    for(let i = 0; i < density; i++){
+      const angle = Math.random() * Math.PI * 2;
+      const dist = Math.random() * radius;
+      const px = x + Math.cos(angle) * dist;
+      const py = y + Math.sin(angle) * dist;
+      ctx.fillStyle = primaryColor;
+      ctx.fillRect(px, py, 1, 1);
+    }
+  }
+  
+  // Event listeners
   canvas.addEventListener('mousedown', startDraw);
   canvas.addEventListener('mousemove', draw);
   canvas.addEventListener('mouseup', endDraw);
@@ -968,6 +1340,9 @@ async function initGuestbook(){
   canvas.addEventListener('touchstart', startDraw);
   canvas.addEventListener('touchmove', draw);
   canvas.addEventListener('touchend', endDraw);
+  canvas.addEventListener('contextmenu', (e)=>e.preventDefault());
+  
+  updateCursor();
   
   // Form submit
   form.addEventListener('submit', (e)=>{
@@ -975,6 +1350,7 @@ async function initGuestbook(){
     const name = (form.querySelector('input[name=name]')||{}).value||'';
     const message = (form.querySelector('textarea[name=message]')||{}).value||'';
     if(!name.trim()||!message.trim()) return;
+    if(message.length > 750){ alert('Message too long (max 750 characters)'); return; }
     
     // Check if canvas has drawing
     const imageData = ctx.getImageData(0,0,canvas.width,canvas.height);
@@ -987,7 +1363,12 @@ async function initGuestbook(){
         try{
           // mark cloud submissions as unapproved until you approve them
           await db.collection('guestbook').add({ t: Date.now(), name, message, drawing, approved: false });
-          form.reset(); ctx.clearRect(0,0,canvas.width,canvas.height);
+          form.reset();
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0,0,canvas.width,canvas.height);
+          undoStack = [];
+          redoStack = [];
+          saveState();
           return; // onSnapshot listener or subsequent fetch will update UI
         }catch(e){ console.warn('Cloud write failed, saving locally', e); }
       }
@@ -995,7 +1376,12 @@ async function initGuestbook(){
       // local saves are considered approved so existing behavior remains
       list.push({ t: Date.now(), name, message, drawing, approved: true });
       saveGuestbook(list);
-      form.reset(); ctx.clearRect(0,0,canvas.width,canvas.height);
+      form.reset();
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+      undoStack = [];
+      redoStack = [];
+      saveState();
       renderGuestbook();
     })();
   });

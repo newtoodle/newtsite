@@ -25,6 +25,24 @@ service cloud.firestore {
       allow write: if request.resource.data.count is number && request.resource.data.last is number;
     }
 
+    // Bark replies: public reads, validated creates, admin-only delete
+    match /barks/{docId} {
+      allow read: if true;
+      allow create: if request.resource.data.postId is string
+                    && request.resource.data.name is string
+                    && request.resource.data.message is string
+                    && request.resource.data.t is number
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.message.size() > 0;
+      allow delete: if request.auth != null && request.auth.token.admin == true;
+    }
+
+    // Licks (likes): public reads, anyone can write counts
+    match /licks/{docId} {
+      allow read: if true;
+      allow write: if request.resource.data.count is number;
+    }
+
     // Deny by default
     match /{document=**} {
       allow read: if false;
