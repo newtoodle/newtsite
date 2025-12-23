@@ -190,29 +190,65 @@ function attachNewtterListeners(){
       
       // Try Firebase for global count
       const db = await ensureFirebase();
-      let newCount = parseInt(countSpan.textContent, 10) || 0;
       
-      if(hasLicked){
-        // Unlike
-        newCount = Math.max(0, newCount - 1);
-        localStorage.removeItem(userLickKey);
-        this.classList.remove('licked');
-        if(iconSpan) iconSpan.textContent = '♡';
-      } else {
-        // Like
-        newCount++;
-        localStorage.setItem(userLickKey, 'true');
-        this.classList.add('licked');
-        if(iconSpan) iconSpan.textContent = '-`♡´-';
-      }
-      
-      countSpan.textContent = newCount;
-      
-      // Update Firebase
       if(db){
         try{
-          await db.collection('licks').doc(postId).set({ count: newCount }, { merge: true });
-        }catch(e){ console.warn('Failed to update lick count in Firebase', e); }
+          const docRef = db.collection('licks').doc(postId);
+          
+          if(hasLicked){
+            // Unlike - decrement
+            await docRef.set({ 
+              count: window.firebase.firestore.FieldValue.increment(-1) 
+            }, { merge: true });
+            localStorage.removeItem(userLickKey);
+            this.classList.remove('licked');
+            if(iconSpan) iconSpan.textContent = '♡';
+          } else {
+            // Like - increment
+            await docRef.set({ 
+              count: window.firebase.firestore.FieldValue.increment(1) 
+            }, { merge: true });
+            localStorage.setItem(userLickKey, 'true');
+            this.classList.add('licked');
+            if(iconSpan) iconSpan.textContent = '-`♡´-';
+          }
+          
+          // Get updated count from Firebase
+          const doc = await docRef.get();
+          const newCount = doc.exists ? (doc.data().count || 0) : 0;
+          countSpan.textContent = Math.max(0, newCount);
+        }catch(e){ 
+          console.warn('Failed to update lick count in Firebase', e);
+          // Fallback to local count if Firebase fails
+          let newCount = parseInt(countSpan.textContent, 10) || 0;
+          if(hasLicked){
+            newCount = Math.max(0, newCount - 1);
+            localStorage.removeItem(userLickKey);
+            this.classList.remove('licked');
+            if(iconSpan) iconSpan.textContent = '♡';
+          } else {
+            newCount++;
+            localStorage.setItem(userLickKey, 'true');
+            this.classList.add('licked');
+            if(iconSpan) iconSpan.textContent = '-`♡´-';
+          }
+          countSpan.textContent = newCount;
+        }
+      } else {
+        // No Firebase - use local counting only
+        let newCount = parseInt(countSpan.textContent, 10) || 0;
+        if(hasLicked){
+          newCount = Math.max(0, newCount - 1);
+          localStorage.removeItem(userLickKey);
+          this.classList.remove('licked');
+          if(iconSpan) iconSpan.textContent = '♡';
+        } else {
+          newCount++;
+          localStorage.setItem(userLickKey, 'true');
+          this.classList.add('licked');
+          if(iconSpan) iconSpan.textContent = '-`♡´-';
+        }
+        countSpan.textContent = newCount;
       }
     });
   });
@@ -485,8 +521,12 @@ function initChaosButton(){
   const chaosBtn = document.getElementById('chaos-button');
   if(!chaosBtn) return;
   chaosBtn.addEventListener('click', function(){
-    const audio = new Audio('assets/chaos1.mp3');
-    audio.play().catch(err=>console.log('Audio play failed:',err));
+    const audio = new Audio('assets/Chaos1.mp3');
+    audio.volume = 1.0;
+    audio.load();
+    setTimeout(()=>{
+      audio.play().catch(err=>console.log('Audio play failed:',err));
+    }, 50);
     const newtImages = ['assets/chaos 1.PNG','assets/Chaos2.PNG','assets/Chaos3.PNG','assets/Chaos4.PNG','assets/Chaos5.PNG','assets/logo.PNG'];
     const newtCount = Math.floor(Math.random()*11)+20;
     for(let i=0; i<newtCount; i++){

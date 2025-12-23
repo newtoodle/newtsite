@@ -18,7 +18,7 @@
     <h2>Tithings</h2>
     <p style="text-align:center;font-size:1.3rem;margin-top:12px;"><strong><em>The Lord demands an offering.</em></strong></p>
     <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
-      <img src="assets/beg.jpg" alt="Newt begging" style="width:280px;height:auto;border-radius:8px;background:transparent;cursor:pointer;transition:transform 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="playBark()">
+      <img src="assets/beg.jpg" alt="Newt begging" id="support-newt-img" style="width:280px;height:auto;border-radius:8px;background:transparent;cursor:pointer;transition:transform 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="playBark(); setTimeout(()=>{this.classList.add('shake-newt'); setTimeout(()=>this.classList.remove('shake-newt'), 500)}, 750)">
       <div style="flex:1;min-width:200px;">
         <p><a href="https://www.amazon.com/baby-reg/hopespuppy-hopes-november-2025-berkeley/1DE6YZYAVE8U8" class="btn" target="_blank" style="font-size:1.1rem;padding:14px 24px;">View Registry on Amazon</a></p>
         <p><a href="http://cash.app/$lordnewt" class="btn" target="_blank" style="font-size:1.1rem;padding:14px 24px;">Tip Me on CashApp</a></p>

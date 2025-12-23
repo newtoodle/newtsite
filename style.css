@@ -15,7 +15,7 @@ a{color:var(--accent-2)}
 .brand{display:flex;align-items:center;gap:12px}
 .logo{height:64px}
 h1{font-family:Cinzel,serif;margin:0;font-size:1.2rem;color:var(--accent-2)}
-#nav-toggle{display:none;border:0;background:transparent;font-size:1.4rem}
+#nav-toggle{display:none;border:0;background:transparent;font-size:1.4rem;color:#5a4a3a}
 .main-nav{display:flex;gap:12px;margin-left:16px}
 .main-nav a{padding:8px 10px;border-radius:8px;text-decoration:none;background:transparent;transition:transform 0.2s ease}
 .main-nav a:hover{transform:scale(1.1)}
@@ -57,9 +57,10 @@ label{display:block;margin-bottom:8px}
 input,textarea{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--glass)}
 
 /* Chaos Button Easter Egg */
-.chaos-button{display:block;margin:12px 0 0 10px;background:transparent;border:2px solid rgba(172,125,90,0.3);border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;transition:all 0.3s ease;z-index:10}
-.chaos-button:hover{animation:chaos-shake 0.5s ease-in-out infinite;border-color:rgba(172,125,90,0.8);background:rgba(172,125,90,0.1)}
+.chaos-button{display:block;margin:12px 0 0 10px;background:transparent;border:2px solid rgba(139,90,60,0.6);border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;transition:all 0.3s ease;z-index:10;color:#8b5a3c}
+.chaos-button:hover{animation:chaos-shake 0.5s ease-in-out infinite;border-color:rgba(139,90,60,0.9);background:rgba(139,90,60,0.15)}
 @keyframes chaos-shake{0%,100%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(-2px,2px) rotate(-5deg)}50%{transform:translate(2px,-2px) rotate(5deg)}75%{transform:translate(-2px,-2px) rotate(-3deg)}}
+.shake-newt{animation:chaos-shake 0.5s ease-in-out !important}
 .chaos-newt{position:fixed;width:150px;height:auto;pointer-events:none;z-index:9999;animation:chaos-float 4s ease-out forwards}
 .treat-toss{position:fixed;width:80px;height:auto;pointer-events:none;z-index:9999;animation:treat-float 2.5s ease-out forwards}
 @keyframes treat-float{0%{transform:translate(0,0) rotate(0deg) scale(0);opacity:0}15%{opacity:1;transform:scale(1.2) rotate(0deg)}100%{transform:translate(var(--treat-x),var(--treat-y)) rotate(var(--treat-rotate)) scale(0.8);opacity:0}}
