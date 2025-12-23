@@ -89,16 +89,20 @@ function loadSkills(){ try{ return JSON.parse(localStorage.getItem(SKILLS_KEY)||
 function saveSkills(obj){ localStorage.setItem(SKILLS_KEY, JSON.stringify(obj)); }
 function initSkillTree(){
   const state = loadSkills();
+  // Make skill checkboxes display-only for visitors. Certain skills should be shown as completed.
+  const completed = new Set([
+    'sit','down','wait','look at me','potty','up','brush teeth','spin','place','bed','crate','outside'
+  ]);
   document.querySelectorAll('#skill-tree input[type=checkbox][data-skill]').forEach(cb=>{
-    const key = cb.dataset.skill; cb.checked = !!state[key];
-    cb.addEventListener('change', ()=>{
-      if(cb.checked){
-        state[key]=true; saveSkills(state);
-      } else {
-        cb.checked = true;
-      }
-    });
+    const key = cb.dataset.skill;
+    // respect persisted state but ensure required ones are checked
+    cb.checked = !!state[key] || completed.has(key);
+    cb.disabled = true; // prevent user interaction
+    cb.setAttribute('aria-disabled', 'true');
+    // Keep state in localStorage so admin edits still persist if desired
+    if(cb.checked) { state[key] = true; }
   });
+  saveSkills(state);
   // Add toggle for carets
   document.querySelectorAll('.caret').forEach(caret=>{
     caret.addEventListener('click', ()=>{
@@ -299,8 +303,9 @@ function initGuestbook(){
   
   // Set canvas size to match display
   const rect = canvas.getBoundingClientRect();
-  canvas.width = 400;
-  canvas.height = 200;
+  // Match the larger canvas in HTML: 800x400
+  canvas.width = 800;
+  canvas.height = 400;
   
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
