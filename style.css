@@ -11,14 +11,35 @@
 body{font-family:Spectral,serif;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--muted);line-height:1.4;cursor:url('assets/paw-cursor-brown.png') 12 12, auto}
 *, *::before, *::after {cursor:url('assets/paw-cursor-brown.png') 12 12, auto !important}
 a{color:var(--accent-2)}
-.site-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:transparent}
+.site-header{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:8px 18px;background:var(--bg);backdrop-filter:blur(10px);border-bottom:1px solid rgba(145,132,118,0.1);box-shadow:0 2px 8px rgba(85,60,45,0.05)}
 .brand{display:flex;align-items:center;gap:12px}
 .logo{height:64px}
 h1{font-family:Cinzel,serif;margin:0;font-size:1.2rem;color:var(--accent-2)}
 #nav-toggle{display:none;border:0;background:transparent;font-size:1.4rem}
-.main-nav{display:flex;gap:12px}
+.main-nav{display:flex;gap:12px;margin-left:16px}
 .main-nav a{padding:8px 10px;border-radius:8px;text-decoration:none;background:transparent;transition:transform 0.2s ease}
 .main-nav a:hover{transform:scale(1.1)}
+
+/* Newtter navigation icon styling */
+.newtter-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.newtter-nav-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  /* Filter to make the figure warm tan #ac7d5a */
+  filter: brightness(0) saturate(100%) invert(54%) sepia(22%) saturate(900%) hue-rotate(340deg) brightness(95%) contrast(86%);
+  background: transparent;
+  vertical-align: middle;
+}
+
+.main-nav a:hover .newtter-nav-icon {
+  filter: brightness(0) saturate(100%) invert(50%) sepia(25%) saturate(1000%) hue-rotate(340deg) brightness(92%) contrast(88%);
+}
 .hero{padding:36px 18px;text-align:center}
 .hero h2{font-family:Cinzel,serif;margin:0 0 8px;font-size:2rem;color:var(--accent-2)}
 .subtitle{margin:0 auto 18px;color:#5b4d3f;max-width:600px;text-align:center}
@@ -27,16 +48,39 @@ h1{font-family:Cinzel,serif;margin:0;font-size:1.2rem;color:var(--accent-2)}
 .age-clock{font-weight:600;background:var(--card);display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid var(--border);box-shadow:0 10px 24px rgba(85,60,45,0.12)}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:18px}
 .card{background:var(--card);padding:14px;border-radius:12px;border:1px solid var(--border);box-shadow:0 10px 24px rgba(85,60,45,0.12)}
-.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;display:inline-block;transition:transform 0.2s ease,filter 0.2s ease}
-.btn:hover{filter:brightness(0.95);transform:scale(1.05)}
+.home-card-hover{transition:transform 0.3s ease,box-shadow 0.3s ease,border-color 0.3s ease;cursor:pointer}
+.home-card-hover:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 16px 32px rgba(85,60,45,0.18);border-color:#ac7d5a}
+.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;display:inline-block;transition:transform 0.3s ease,filter 0.2s ease,box-shadow 0.3s ease;box-shadow:0 4px 12px rgba(172,125,90,0.3)}
+.btn:hover{filter:brightness(1.05);transform:scale(1.08) translateY(-2px);box-shadow:0 8px 20px rgba(172,125,90,0.5)}
 .contact{max-width:720px;margin:18px auto}
 label{display:block;margin-bottom:8px}
 input,textarea{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--glass)}
+
+/* Chaos Button Easter Egg */
+.chaos-button{display:block;margin:12px 0 0 10px;background:transparent;border:2px solid rgba(172,125,90,0.3);border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;transition:all 0.3s ease;z-index:10}
+.chaos-button:hover{animation:chaos-shake 0.5s ease-in-out infinite;border-color:rgba(172,125,90,0.8);background:rgba(172,125,90,0.1)}
+@keyframes chaos-shake{0%,100%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(-2px,2px) rotate(-5deg)}50%{transform:translate(2px,-2px) rotate(5deg)}75%{transform:translate(-2px,-2px) rotate(-3deg)}}
+.chaos-newt{position:fixed;width:150px;height:auto;pointer-events:none;z-index:9999;animation:chaos-float 4s ease-out forwards}
+.treat-toss{position:fixed;width:80px;height:auto;pointer-events:none;z-index:9999;animation:treat-float 2.5s ease-out forwards}
+@keyframes treat-float{0%{transform:translate(0,0) rotate(0deg) scale(0);opacity:0}15%{opacity:1;transform:scale(1.2) rotate(0deg)}100%{transform:translate(var(--treat-x),var(--treat-y)) rotate(var(--treat-rotate)) scale(0.8);opacity:0}}
+@keyframes chaos-float{0%{transform:translate(0,0) rotate(0deg) scale(0);opacity:0}15%{opacity:1;transform:scale(1) rotate(0deg)}100%{transform:translate(var(--chaos-x),var(--chaos-y)) rotate(var(--chaos-rotate)) scale(0.5);opacity:0}}
+
 .site-footer{text-align:center;padding:18px;color:#918476}
 .site-footer a{transition:transform 0.2s ease;display:inline-block}
 .site-footer a:hover{transform:scale(1.2)}
 .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:40}
 .update-block{background:var(--card);padding:14px;border-radius:12px;margin-bottom:12px;border:1px solid var(--border);box-shadow:0 8px 20px rgba(85,60,45,0.12);}
+
+/* Override update-block styles for newtter posts */
+.newtter-post.update-block {
+  background: transparent;
+  padding: 12px 16px;
+  border-radius: 0;
+  margin-bottom: 0;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  box-shadow: none;
+}
 .skill-container{display:flex;justify-content:flex-start;align-items:flex-start;margin-top:20px}
 .skill-tree{list-style:none;padding:40px;margin:0;font-size:1.2rem;display:flex;flex-wrap:wrap;justify-content:space-between}
 .caret{cursor:pointer;user-select:none}
@@ -86,6 +130,420 @@ input[type=checkbox]{vertical-align:middle;margin-left:40px;position:relative;to
 .milestone-tagline{font-size:0.85rem;margin:4px 0 0;line-height:1.3;opacity:0.95}
 
 /* Additional styles can be added below */
+
+/* Newtter Page Layout */
+.newtter-page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Newtter Page Header with Logo */
+.newtter-page-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+
+.newtter-page-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(54%) sepia(22%) saturate(900%) hue-rotate(340deg) brightness(95%) contrast(86%);
+  background: transparent;
+}
+
+.newtter-page-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  letter-spacing: -0.5px;
+  color: #ac7d5a;
+  margin: 0;
+}
+
+/* Newtter Profile Bio Section */
+.newtter-profile {
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  overflow: hidden;
+  background: var(--card);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.newtter-banner {
+  width: 100%;
+  height: 150px;
+  background: url('assets/newtheader.jpeg') center center / cover no-repeat;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 12px 16px;
+}
+
+.newtter-post-count {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#post-count-number {
+  color: #4a5568;
+  font-weight: 700;
+}
+
+.newtter-profile-info {
+  padding: 16px;
+  position: relative;
+  margin-top: -40px;
+}
+
+.newtter-profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid var(--card);
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: 12px;
+}
+
+.newtter-profile-details {
+  margin-top: 8px;
+}
+
+.newtter-profile-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #4a5568;
+  margin: 0 0 2px 0;
+}
+
+.newtter-profile-handle {
+  font-size: 0.95rem;
+  color: var(--muted);
+  opacity: 0.7;
+  margin: 0 0 12px 0;
+}
+
+.newtter-profile-bio {
+  font-size: 1rem;
+  color: var(--muted);
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.newtter-profile-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.newtter-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Newtter Timeline */
+.newtter-timeline {
+  border-bottom: 1px solid var(--border);
+}
+
+.newtter-timeline-header {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 16px;
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+  color: #4a5568;
+  background: var(--card);
+  sticky: top 0;
+}
+
+.newtter-posts-container {
+  max-height: 600px;
+  overflow-y: auto;
+  background: var(--card);
+}
+
+/* Newtter logo heading */
+.newtter-logo {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 1.8rem;
+  letter-spacing: -0.5px;
+  color: #6b7c5a;
+}
+
+/* Newtter social features */
+.newtter-post {
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+}
+
+.newtter-post:last-child {
+  border-bottom: none;
+}
+
+.newtter-post p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.newtter-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.newtter-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+  transform: scale(1.02);
+}
+
+.newtter-user-info {
+  flex: 1;
+}
+
+.newtter-display-name {
+  font-weight: 700;
+  color: #4a5568;
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.newtter-handle {
+  color: var(--muted);
+  font-weight: 400;
+  opacity: 0.7;
+  margin-left: 4px;
+}
+
+.newtter-nickname {
+  font-size: 0.85rem;
+  color: var(--muted);
+  opacity: 0.8;
+  margin-top: 2px;
+}
+
+.newtter-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.newtter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.newtter-btn:hover {
+  background: var(--bg);
+  transform: scale(1.05);
+}
+
+.lick-btn {
+  font-size: 1.1rem;
+}
+
+.lick-btn.licked {
+  background: #ffe6e6;
+  border-color: #ff9999;
+  color: #c0392b;
+}
+
+.lick-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.lick-btn.licked .lick-icon {
+  animation: heartPop 0.3s ease;
+}
+
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+.lick-count {
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+.bark-btn:hover {
+  background: #e3f2fd;
+  border-color: #2196f3;
+}
+
+.renewt-btn:hover {
+  background: #e8f5e9;
+  border-color: #4caf50;
+}
+
+.renewt-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.renewt-btn.renewt-active .renewt-icon {
+  animation: renewtSpin 0.6s ease;
+}
+
+@keyframes renewtSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* Bark reply section */
+.bark-reply-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e1e8ed;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.bark-reply-form {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #e1e8ed;
+}
+
+.bark-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  color: #4a5568;
+  resize: vertical;
+  min-height: 60px;
+  transition: border-color 0.2s ease;
+}
+
+.bark-textarea:focus {
+  outline: none;
+  border-color: #ac7d5a;
+}
+
+.bark-name {
+  padding: 10px 12px;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  background: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  color: #4a5568;
+  transition: border-color 0.2s ease;
+}
+
+.bark-name:focus {
+  outline: none;
+  border-color: #ac7d5a;
+}
+
+.bark-submit-btn {
+  background: #ac7d5a;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.bark-submit-btn:hover {
+  background: #9a6d4d;
+}
+
+.bark-cancel-btn {
+  background: transparent;
+  color: #4a5568;
+  border: 1px solid #e1e8ed;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.bark-cancel-btn:hover {
+  background: #f7f9fa;
+  border-color: #4a5568;
+}
+
+.bark-replies-list {
+  margin-top: 12px;
+}
+
+.bark-item {
+  background: var(--bg);
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid var(--border);
+}
+
+.bark-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.bark-item strong {
+  color: #4a5568;
+  font-weight: 700;
+}
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {

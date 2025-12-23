@@ -59,8 +59,9 @@ function updateAge(){
   const weeks = Math.floor(totalDays / 7);
   const days = totalDays % 7;
   const hours = Math.floor(diff / msInHour); diff -= hours*msInHour;
-  const minutes = Math.floor(diff / msInMinute);
-  const display = `${weeks} weeks, ${days} days, ${hours}h ${minutes}m`;
+  const minutes = Math.floor(diff / msInMinute); diff -= minutes*msInMinute;
+  const seconds = Math.floor(diff / msInSecond);
+  const display = `${weeks} weeks, ${days} days, ${hours}h ${minutes}m ${seconds}s`;
   const el = document.getElementById('age-text'); if(el) el.textContent = display;
 }
 
@@ -120,15 +121,263 @@ async function loadUpdates(){
   }
 }
 function renderUpdates(){
-  loadUpdates().then(list => {
+  loadUpdates().then(async list => {
     const container = document.getElementById('updates-list');
     if(!container) return;
     container.innerHTML = '';
-    list.slice().reverse().forEach(u=>{
-      const el = document.createElement('div'); el.className='update-block'; el.innerHTML = `<time>${new Date(u.t).toLocaleString()}</time><p>${u.text}</p>`; container.appendChild(el);
+    
+    // Update post count
+    const postCountEl = document.getElementById('post-count-number');
+    if(postCountEl) postCountEl.textContent = list.length;
+    
+    // Get Firebase for global lick counts
+    const db = await ensureFirebase();
+    
+    for(const u of list.slice().reverse()){
+      const postId = `newt-${u.t}`;
+      const userLickKey = `newtter_licks_${postId}_user`;
+      const hasLicked = localStorage.getItem(userLickKey) === 'true';
+      
+      // Try to get lick count from Firebase
+      let lickCount = 0;
+      if(db){
+        try{
+          const doc = await db.collection('licks').doc(postId).get();
+          lickCount = doc.exists ? (doc.data().count || 0) : 0;
+        }catch(e){ console.warn('Failed to load lick count', e); }
+      }
+      
+      const el = document.createElement('div'); 
+      el.className='update-block newtter-post'; 
+      el.dataset.postId = postId;
+      el.innerHTML = `
+        <div class="newtter-header">
+          <img src="assets/pfp.jpeg" alt="Newt" class="newtter-avatar">
+          <div class="newtter-user-info">
+            <div class="newtter-display-name">Newt <span class="newtter-handle">@lordnewt</span></div>
+            <div class="newtter-nickname">Mr. Pee Pee Man</div>
+          </div>
+        </div>
+        <p style="margin:12px 0;">${u.text}</p>
+        <time class="meta" style="font-size:0.8rem;display:block;margin-top:8px;">${new Date(u.t).toLocaleString()}</time>
+        <div class="newtter-actions">
+          <button class="newtter-btn renewt-btn" data-post-id="${postId}" title="Re-Newt (Share)">
+            <span class="renewt-icon">〇</span> Re-Newt
+          </button>
+          <button class="newtter-btn lick-btn ${hasLicked ? 'licked' : ''}" data-post-id="${postId}" title="Lick">
+            <span class="lick-icon">${hasLicked ? '-`♡´-' : '♡'}</span> Lick <span class="lick-count">${lickCount}</span>
+          </button>
+          <button class="newtter-btn bark-btn" data-post-id="${postId}" title="Bark (Reply)">
+            <span class="bark-icon">.ᐟ</span> Bark
+          </button>
+        </div>
+      `;
+      container.appendChild(el);
+    }
+    attachNewtterListeners();
+  });
+}
+
+function attachNewtterListeners(){
+  // Lick buttons
+  document.querySelectorAll('.lick-btn').forEach(btn => {
+    btn.addEventListener('click', async function(){
+      const postId = this.dataset.postId;
+      const userLickKey = `newtter_licks_${postId}_user`;
+      const hasLicked = localStorage.getItem(userLickKey) === 'true';
+      const iconSpan = this.querySelector('.lick-icon');
+      const countSpan = this.querySelector('.lick-count');
+      
+      // Try Firebase for global count
+      const db = await ensureFirebase();
+      let newCount = parseInt(countSpan.textContent, 10) || 0;
+      
+      if(hasLicked){
+        // Unlike
+        newCount = Math.max(0, newCount - 1);
+        localStorage.removeItem(userLickKey);
+        this.classList.remove('licked');
+        if(iconSpan) iconSpan.textContent = '♡';
+      } else {
+        // Like
+        newCount++;
+        localStorage.setItem(userLickKey, 'true');
+        this.classList.add('licked');
+        if(iconSpan) iconSpan.textContent = '-`♡´-';
+      }
+      
+      countSpan.textContent = newCount;
+      
+      // Update Firebase
+      if(db){
+        try{
+          await db.collection('licks').doc(postId).set({ count: newCount }, { merge: true });
+        }catch(e){ console.warn('Failed to update lick count in Firebase', e); }
+      }
+    });
+  });
+  
+  // Bark buttons (replies)
+  document.querySelectorAll('.bark-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const postId = this.dataset.postId;
+      const postBlock = this.closest('.newtter-post');
+      let replySection = postBlock.querySelector('.bark-reply-section');
+      const barkIcon = this.querySelector('.bark-icon');
+      
+      // Toggle reply section
+      if(replySection){
+        replySection.remove();
+        if(barkIcon) barkIcon.textContent = '.ᐟ';
+      } else {
+        if(barkIcon) barkIcon.textContent = '.ᐟ.ᐟ';
+        replySection = document.createElement('div');
+        replySection.className = 'bark-reply-section';
+        replySection.innerHTML = `
+          <div class="bark-reply-form">
+            <textarea placeholder="Bark back at Newt..." rows="3" class="bark-textarea"></textarea>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <input type="text" placeholder="Your name" class="bark-name" style="flex:1;">
+              <button class="btn bark-submit-btn">Send Bark</button>
+              <button class="btn bark-cancel-btn">Cancel</button>
+            </div>
+          </div>
+          <div class="bark-replies-list"></div>
+        `;
+        postBlock.appendChild(replySection);
+        
+        // Load existing replies
+        loadBarks(postId, replySection.querySelector('.bark-replies-list'));
+        
+        // Submit handler
+        replySection.querySelector('.bark-submit-btn').addEventListener('click', async () => {
+          const message = replySection.querySelector('.bark-textarea').value.trim();
+          const name = replySection.querySelector('.bark-name').value.trim() || 'Anonymous';
+          if(!message) return;
+          
+          const bark = { postId, name, message, t: Date.now() };
+          
+          // Try Firebase first
+          const db = await ensureFirebase();
+          if(db){
+            try{
+              await db.collection('barks').add(bark);
+              replySection.querySelector('.bark-textarea').value = '';
+              replySection.querySelector('.bark-name').value = '';
+              return;
+            }catch(e){ console.warn('Cloud write failed', e); }
+          }
+          
+          // Fallback to localStorage
+          const key = `barks_${postId}`;
+          const list = JSON.parse(localStorage.getItem(key) || '[]');
+          list.push(bark);
+          localStorage.setItem(key, JSON.stringify(list));
+          loadBarks(postId, replySection.querySelector('.bark-replies-list'));
+          replySection.querySelector('.bark-textarea').value = '';
+          replySection.querySelector('.bark-name').value = '';
+        });
+        
+        // Cancel handler
+        replySection.querySelector('.bark-cancel-btn').addEventListener('click', () => {
+          replySection.remove();
+        });
+      }
+    });
+  });
+  
+  // Re-Newt buttons (share)
+  document.querySelectorAll('.renewt-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const postId = this.dataset.postId;
+      const postUrl = `${window.location.origin}${window.location.pathname}#${postId}`;
+      const text = 'Check out this Newtter post from Lord Newt!';
+      const iconSpan = this.querySelector('.renewt-icon');
+      
+      // Add animation class and change icon
+      this.classList.add('renewt-active');
+      if(iconSpan) iconSpan.textContent = '⬤';
+      setTimeout(() => {
+        this.classList.remove('renewt-active');
+        if(iconSpan) iconSpan.textContent = '〇';
+      }, 600);
+      
+      // Try native share API first (best for mobile - includes Instagram, etc.)
+      if(navigator.share){
+        navigator.share({
+          title: 'Newtter Post',
+          text: text,
+          url: postUrl
+        }).catch(()=>{});
+      } else {
+        // Desktop fallback - show share options
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(postUrl)}`;
+        const shareMenu = `
+Share this post:
+
+1. Twitter
+2. Copy link
+
+Choose option (1-2):`;
+        const choice = prompt(shareMenu);
+        
+        if(choice === '1'){
+          window.open(twitterUrl, '_blank', 'width=550,height=420');
+        } else if(choice === '2' || !choice){
+          if(navigator.clipboard){
+            navigator.clipboard.writeText(postUrl).then(()=>{
+              alert('Link copied! Share it on Instagram or anywhere else.');
+            }).catch(()=>{
+              prompt('Copy this link to share:', postUrl);
+            });
+          } else {
+            prompt('Copy this link to share:', postUrl);
+          }
+        }
+      }
     });
   });
 }
+
+async function loadBarks(postId, container){
+  if(!container) return;
+  
+  // Try Firebase first
+  const db = await ensureFirebase();
+  let barks = [];
+  
+  if(db){
+    try{
+      const snap = await db.collection('barks').where('postId','==',postId).orderBy('t','asc').get();
+      barks = snap.docs.map(d => d.data());
+    }catch(e){
+      console.warn('Loading barks from cloud failed', e);
+    }
+  }
+  
+  // Fallback to localStorage
+  if(!barks.length){
+    const key = `barks_${postId}`;
+    barks = JSON.parse(localStorage.getItem(key) || '[]');
+  }
+  
+  container.innerHTML = '';
+  if(barks.length === 0){
+    container.innerHTML = '<p style="color:var(--muted);font-size:0.85rem;margin-top:12px;">No barks yet. Be the first!</p>';
+    return;
+  }
+  
+  barks.forEach(bark => {
+    const barkEl = document.createElement('div');
+    barkEl.className = 'bark-item';
+    barkEl.innerHTML = `
+      <p><strong>${bark.name}</strong> <span class="meta">${new Date(bark.t).toLocaleString()}</span></p>
+      <p style="margin-top:4px;">${bark.message}</p>
+    `;
+    container.appendChild(barkEl);
+  });
+}
+
 function initUpdates(){
   const form = document.getElementById('update-form');
   if(form){
@@ -231,9 +480,72 @@ function initTreatsCounter(){
   el.textContent = count.toLocaleString();
 }
 
+// Chaos Button Easter Egg
+function initChaosButton(){
+  const chaosBtn = document.getElementById('chaos-button');
+  if(!chaosBtn) return;
+  chaosBtn.addEventListener('click', function(){
+    const audio = new Audio('assets/chaos1.mp3');
+    audio.play().catch(err=>console.log('Audio play failed:',err));
+    const newtImages = ['assets/chaos 1.PNG','assets/Chaos2.PNG','assets/Chaos3.PNG','assets/Chaos4.PNG','assets/Chaos5.PNG','assets/logo.PNG'];
+    const newtCount = Math.floor(Math.random()*11)+20;
+    for(let i=0; i<newtCount; i++){
+      setTimeout(()=>{
+        const img = document.createElement('img');
+        img.src = newtImages[Math.floor(Math.random()*newtImages.length)];
+        img.className = 'chaos-newt';
+        const startX = Math.random()*window.innerWidth;
+        const startY = Math.random()*window.innerHeight;
+        img.style.left = startX+'px';
+        img.style.top = startY+'px';
+        const moveX = (Math.random()-0.5)*1000;
+        const moveY = (Math.random()-0.5)*1000;
+        const rotate = (Math.random()-0.5)*720;
+        img.style.setProperty('--chaos-x',moveX+'px');
+        img.style.setProperty('--chaos-y',moveY+'px');
+        img.style.setProperty('--chaos-rotate',rotate+'deg');
+        document.body.appendChild(img);
+        setTimeout(()=>img.remove(),4000);
+      }, i*120);
+    }
+  });
+}
+
+// Treat Button
+function initTreatButton(){
+  const treatBtn = document.getElementById('treat-button');
+  if(!treatBtn) return;
+  treatBtn.addEventListener('click', function(){
+    setTimeout(()=>{
+      const audio = new Audio('assets/chomp.mp3');
+      audio.play().catch(err=>console.log('Audio play failed:',err));
+    },100);
+    const treatCount = Math.floor(Math.random()*20)+1;
+    for(let i=0; i<treatCount; i++){
+      setTimeout(()=>{
+        const img = document.createElement('img');
+        img.src = 'assets/treat.png';
+        img.className = 'treat-toss';
+        const startX = Math.random()*window.innerWidth;
+        const startY = Math.random()*window.innerHeight;
+        img.style.left = startX+'px';
+        img.style.top = startY+'px';
+        const moveX = (Math.random()-0.5)*800;
+        const moveY = (Math.random()-0.5)*800;
+        const rotate = (Math.random()-0.5)*1080;
+        img.style.setProperty('--treat-x',moveX+'px');
+        img.style.setProperty('--treat-y',moveY+'px');
+        img.style.setProperty('--treat-rotate',rotate+'deg');
+        document.body.appendChild(img);
+        setTimeout(()=>img.remove(),2500);
+      }, i*100);
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
-  updateAge(); setInterval(updateAge, 60*1000);
-  initNav(); initContactForm(); initUpdates(); initSkillTree(); initFAQ(); initWeightConverter(); initTreatsCounter(); initStatusWidget(); initPhotoOfDay(); initNicknames(); initGuestbook();
+  updateAge(); setInterval(updateAge, 1000);
+  initNav(); initContactForm(); initUpdates(); initSkillTree(); initFAQ(); initWeightConverter(); initTreatsCounter(); initStatusWidget(); initPhotoOfDay(); initNicknames(); initGuestbook(); initChaosButton(); initTreatButton();
   initVisitCounter();
 });
 
@@ -399,10 +711,14 @@ function saveNickname(entry){ localStorage.setItem(NICKNAMES_KEY, JSON.stringify
 function formatNickTs(ts){ try{ return new Date(ts).toLocaleString(); }catch{return ''} }
 function renderNickname(){
   const display = document.getElementById('nicknames-display');
+  const profileBio = document.getElementById('profile-nickname');
   const tsEl = document.getElementById('nickname-timestamp');
-  if(!display) return;
   const entry = loadNickname();
-  display.textContent = entry?.value ? entry.value : 'None yet.';
+  const nickname = entry?.value ? entry.value : 'None yet.';
+  
+  // Update both locations (old nickname box if exists, and new profile bio)
+  if(display) display.textContent = nickname;
+  if(profileBio) profileBio.textContent = nickname;
   if(tsEl){ tsEl.textContent = entry?.t ? `Updated ${formatNickTs(entry.t)}` : ''; }
 }
 function initNicknames(){

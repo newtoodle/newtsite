@@ -12,16 +12,39 @@
 <meta name="theme-color" content="#f7e9e0">
 </head>
 <body>
-<header class="site-header"><div class="brand"><a href="index.html"><img src="assets/logo.PNG" alt="Newt logo" class="logo"></a></div><button id="nav-toggle" aria-expanded="false" aria-controls="main-nav">☰</button><nav id="main-nav" class="main-nav" aria-hidden="true"><a href="index.html">Home</a><a href="gallery.html">Gallery</a><a href="updates.html">Daily Updates</a><a href="faq.html">FAQ</a><a href="skills.html">Puppy Stats</a><a href="buy.html">Support Me</a><a href="guestbook.html">Guestbook</a></nav><div id="nav-overlay" class="nav-overlay" hidden></div></header>
-<main class="contact card">
-  <h2>Daily Updates</h2>
-  <section class="card" id="nickname-box" style="margin-bottom:14px;">
-    <h3>Current Nickname(s)</h3>
-    <div id="nicknames-display" class="stat-value" style="margin:8px 0">Mr. Pee Pee Man</div>
-    <span id="nickname-timestamp" class="meta" style="display:block;margin-top:6px"></span>
+<header class="site-header"><div class="brand"><a href="home.html"><img src="assets/logo.PNG" alt="Newt logo" class="logo"></a></div><button id="nav-toggle" aria-expanded="false" aria-controls="main-nav">☰</button><nav id="main-nav" class="main-nav" aria-hidden="true"><a href="home.html">Home</a><a href="updates.html" class="newtter-nav-link"><img src="assets/NewtterLogo1.png" alt="" class="newtter-nav-icon">Newtter</a><a href="gallery.html">Gallery</a><a href="faq.html">FAQ</a><a href="puppystats.html">Puppy Stats</a><a href="supportme.html">Support Me</a><a href="guestbook.html">Guestbook</a></nav><div id="nav-overlay" class="nav-overlay" hidden></div></header>
+<main class="contact card newtter-page">
+  <!-- Newtter Page Header -->
+  <div class="newtter-page-header">
+    <img src="assets/NewtterLogo1.png" alt="Newtter" class="newtter-page-logo">
+    <h1 class="newtter-page-title">Newtter</h1>
+  </div>
+  
+  <!-- Newtter Profile Bio -->
+  <section class="newtter-profile">
+    <div class="newtter-banner">
+      <div class="newtter-post-count">
+        <span id="post-count-number">0</span> Posts
+      </div>
+    </div>
+    <div class="newtter-profile-info">
+      <img src="assets/pfp.jpeg" alt="Newt" class="newtter-profile-avatar">
+      <div class="newtter-profile-details">
+        <h3 class="newtter-profile-name">Newt</h3>
+        <p class="newtter-profile-handle">@lordnewt</p>
+        <p class="newtter-profile-bio" id="profile-nickname">Daily updates and posts from Mr. Pee Pee Man</p>
+        <div class="newtter-profile-meta">
+          <span class="newtter-location">⚲ California</span>
+        </div>
+      </div>
+    </div>
   </section>
-  <h3 style="margin-top:20px;">Updates</h3>
-  <section id="updates-list"></section>
+  
+  <!-- Newtter Timeline -->
+  <div class="newtter-timeline">
+    <h3 class="newtter-timeline-header">Posts</h3>
+    <section id="updates-list" class="newtter-posts-container"></section>
+  </div>
 </main>
 <footer class="site-footer"><small>© 2025 Newt</small><a href="https://www.instagram.com/newtoodle/" target="_blank" aria-label="Instagram"><img src="assets/instagram-icon.svg" alt="Instagram" style="width:20px;height:20px;vertical-align:middle;margin-left:10px;"></a><a href="mailto:lordnewtguillemot@gmail.com" aria-label="Email"><img src="assets/mail-icon.svg" alt="Email" style="width:20px;height:20px;vertical-align:middle;margin-left:8px;"></a></footer>
 <script src="script.js"></script>
