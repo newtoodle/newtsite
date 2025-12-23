@@ -17,7 +17,8 @@ a{color:var(--accent-2)}
 h1{font-family:Cinzel,serif;margin:0;font-size:1.2rem;color:var(--accent-2)}
 #nav-toggle{display:none;border:0;background:transparent;font-size:1.4rem}
 .main-nav{display:flex;gap:12px}
-.main-nav a{padding:8px 10px;border-radius:8px;text-decoration:none;background:transparent}
+.main-nav a{padding:8px 10px;border-radius:8px;text-decoration:none;background:transparent;transition:transform 0.2s ease}
+.main-nav a:hover{transform:scale(1.1)}
 .hero{padding:36px 18px;text-align:center}
 .hero h2{font-family:Cinzel,serif;margin:0 0 8px;font-size:2rem;color:var(--accent-2)}
 .subtitle{margin:0 auto 18px;color:#5b4d3f;max-width:600px;text-align:center}
@@ -26,12 +27,14 @@ h1{font-family:Cinzel,serif;margin:0;font-size:1.2rem;color:var(--accent-2)}
 .age-clock{font-weight:600;background:var(--card);display:inline-block;padding:10px 14px;border-radius:12px;border:1px solid var(--border);box-shadow:0 10px 24px rgba(85,60,45,0.12)}
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:18px}
 .card{background:var(--card);padding:14px;border-radius:12px;border:1px solid var(--border);box-shadow:0 10px 24px rgba(85,60,45,0.12)}
-.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;display:inline-block}
-.btn:hover{filter:brightness(0.95)}
+.btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;text-decoration:none;display:inline-block;transition:transform 0.2s ease,filter 0.2s ease}
+.btn:hover{filter:brightness(0.95);transform:scale(1.05)}
 .contact{max-width:720px;margin:18px auto}
 label{display:block;margin-bottom:8px}
 input,textarea{width:100%;padding:8px;border-radius:8px;border:1px solid var(--border);background:var(--glass)}
 .site-footer{text-align:center;padding:18px;color:#918476}
+.site-footer a{transition:transform 0.2s ease;display:inline-block}
+.site-footer a:hover{transform:scale(1.2)}
 .nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:40}
 .update-block{background:var(--card);padding:14px;border-radius:12px;margin-bottom:12px;border:1px solid var(--border);box-shadow:0 8px 20px rgba(85,60,45,0.12);}
 .skill-container{display:flex;justify-content:flex-start;align-items:flex-start;margin-top:20px}
