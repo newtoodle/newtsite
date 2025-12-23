@@ -92,28 +92,14 @@ Set custom claims for your admin account via the Firebase Admin SDK (server side
 
 Email notifications (optional)
 
-To receive email notifications for new submissions, create a Firebase Cloud Function triggered on document create and use an email provider (SendGrid, Mailgun, etc.) to send mail. Example Node.js Cloud Function (index.js):
+Cloud Functions are optional and require the Firebase project to be on the Blaze (pay-as-you-go) plan. If you prefer a free route, you can deploy a small Google Apps Script web app that accepts POSTs from the site and sends mail via `MailApp.sendEmail()` — this avoids Blaze billing and still provides notifications.
 
-```javascript
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-const sgMail = require('@sendgrid/mail');
+Deploying the rules
 
-admin.initializeApp();
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+After adding `firestore.rules` to the repo, you can deploy rules with the Firebase CLI:
 
-exports.notifyGuestbook = functions.firestore.document('guestbook/{docId}').onCreate(async (snap, ctx) => {
-  const data = snap.data();
-  const msg = {
-    to: 'your-email@example.com',
-    from: 'no-reply@newt.dog',
-    subject: `New guestbook entry from ${data.name}`,
-    text: `${data.name} wrote:\n\n${data.message}`
-  };
-  await sgMail.send(msg);
-});
+```bash
+firebase deploy --only firestore:rules --project YOUR_PROJECT_ID
 ```
 
-Deploy the function and set `SENDGRID_API_KEY` as an environment variable in your Functions settings.
-
-If you'd like, I can help generate that Cloud Function and guide you through deploying it.
+If you later decide you want Cloud Functions for server-side notifications, tell me and I will re-create the functions and guide a deploy (note: Cloud Functions deployment may require upgrading the project billing plan).

@@ -32,6 +32,7 @@ firebase deploy --only functions
 
 5) After deploy, note the `incrementVisit` URL printed by deploy logs; set `window.FIREBASE_FUNCTIONS_URL` in your `firebase-config.js` or paste into the site (optional).
 
-Security notes
-- Use `functions.config()` for secrets; do not commit them.
-- Consider enabling App Check or requiring authentication for the `incrementVisit` endpoint to avoid abuse.
+This folder previously contained Cloud Functions for notifications. Functions
+have been removed from the repository per cleanup to avoid requiring the
+Blaze billing plan. If you later want server-side logic, ask me and I will
+recreate the minimal functions and deployment steps.

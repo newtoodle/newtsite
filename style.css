@@ -7,12 +7,13 @@
 	--muted:#5a4a3a;           /* body text, darker for readability */
 	--glass:rgba(255,255,255,0.85);
 }
-*{box-sizing:border-box;cursor:url('assets/newt-paw.png') 16 16, auto}
-body{font-family:Spectral,serif;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--muted);line-height:1.4}
+*{box-sizing:border-box}
+body{font-family:Spectral,serif;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--muted);line-height:1.4;cursor:url('assets/paw-cursor-brown.png') 12 12, auto}
+*, *::before, *::after {cursor:url('assets/paw-cursor-brown.png') 12 12, auto !important}
 a{color:var(--accent-2)}
 .site-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;background:transparent}
 .brand{display:flex;align-items:center;gap:12px}
-.logo{height:44px}
+.logo{height:64px}
 h1{font-family:Cinzel,serif;margin:0;font-size:1.2rem;color:var(--accent-2)}
 #nav-toggle{display:none;border:0;background:transparent;font-size:1.4rem}
 .main-nav{display:flex;gap:12px}
@@ -82,3 +83,4 @@ input[type=checkbox]{vertical-align:middle;margin-left:40px;position:relative;to
 .milestone-tagline{font-size:0.85rem;margin:4px 0 0;line-height:1.3;opacity:0.95}
 
 /* Additional styles can be added below */
+

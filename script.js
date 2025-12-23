@@ -110,7 +110,7 @@ function initUpdates(){
   try{
     const existing = loadUpdates();
     if(!existing || existing.length === 0){
-      existing.push({ t: new Date(2025,10,15).getTime(), text: '<strong>Welcome to our Life</strong><br/>The day we got Newt. Taking him back from Utah now!' });
+      existing.push({ t: new Date(2025,11,22,14,30,0).getTime(), text: 'Just finished making this here website. Newt and I will be monitoring your messages, questions, and emails. i love him so much . .' });
       saveUpdates(existing);
     }
   }catch(e){ /* ignore */ }
@@ -159,29 +159,27 @@ function initWeightConverter(){
     showKg = !showKg;
     renderWeight(showKg);
   });
+  // make weigh-ins data-driven; order newest-first
+  const weighIns = [
+    { date: '12/18/25', lbs: 4.5, note: '' },
+    { date: '12/12/25', lbs: 4.2, note: '' },
+    { date: '12/2/25',  lbs: 3.7, note: 'at the vet' },
+    { date: '11/28/25', lbs: 3.3, note: '' },
+    { date: '11/21/25', lbs: 2.7, note: '' }
+  ];
+
   renderWeight(false);
   function renderWeight(inKg){
+    const latest = weighIns[0];
+    if(!latest) return;
     if(inKg){
-      const kg = lbsToKg(4.5);
-      weightText.innerHTML = `Latest: <strong>${kg} kg</strong>`;
+      weightText.innerHTML = `Latest: <strong>${lbsToKg(latest.lbs)} kg</strong>`;
       toggle.textContent = 'Show in lbs';
-      list.innerHTML = `
-        <li>11/21/25: ${lbsToKg(2.7)} kg</li>
-        <li>11/28/25: ${lbsToKg(3.3)} kg</li>
-        <li>12/2/25: ${lbsToKg(3.7)} kg (at the vet)</li>
-        <li>12/12/25: ${lbsToKg(4.2)} kg</li>
-        <li>12/18/25: ${lbsToKg(4.5)} kg</li>
-      `;
+      list.innerHTML = weighIns.map(w => `<li>${w.date}: ${lbsToKg(w.lbs)} kg${w.note ? ' ('+w.note+')' : ''}</li>`).join('');
     } else {
-      weightText.innerHTML = `Latest: <strong>4.5 lbs</strong>`;
+      weightText.innerHTML = `Latest: <strong>${latest.lbs} lbs</strong>`;
       toggle.textContent = 'Show in kg';
-      list.innerHTML = `
-        <li>11/21/25: 2.7 lbs</li>
-        <li>11/28/25: 3.3 lbs</li>
-        <li>12/2/25: 3.7 lbs (at the vet)</li>
-        <li>12/12/25: 4.2 lbs</li>
-        <li>12/18/25: 4.5 lbs</li>
-      `;
+      list.innerHTML = weighIns.map(w => `<li>${w.date}: ${w.lbs} lbs${w.note ? ' ('+w.note+')' : ''}</li>`).join('');
     }
   }
 }
@@ -217,9 +215,29 @@ async function initVisitCounter(){
     }
     const db = await ensureFirebase();
     if(db){
-      const doc = await db.doc('metrics/visits').get();
-      const count = (doc.exists && doc.data().count) ? doc.data().count : 0;
-      container.textContent = `Visits: ${count}`;
+      // try to increment atomically from the client using FieldValue.increment
+      try{
+        const ref = db.doc('metrics/visits');
+        await db.runTransaction(async (tx)=>{
+          const snap = await tx.get(ref);
+          const adminField = db.FieldValue ? db.FieldValue.increment(1) : window.firebase.firestore.FieldValue.increment(1);
+          if(!snap.exists){
+            tx.set(ref, { count: 1, last: Date.now() });
+          } else {
+            tx.update(ref, { count: adminField, last: Date.now() });
+          }
+        });
+      }catch(e){
+        // fallback: simple get/set
+        try{
+          const doc = await db.doc('metrics/visits').get();
+          const count = (doc.exists && doc.data().count) ? doc.data().count : 0;
+          await db.doc('metrics/visits').set({ count: count + 1, last: Date.now() }, { merge: true });
+        }catch(err){ console.warn('Visit counter write failed', err); }
+      }
+      const final = await db.doc('metrics/visits').get();
+      const finalCount = (final.exists && final.data().count) ? final.data().count : 0;
+      container.textContent = `Visits: ${finalCount}`;
     }
   }catch(e){ console.warn('Visit counter error', e); }
 }
@@ -382,7 +400,10 @@ function initPhotoOfDay(){
     'assets/Newt3.jpeg',
     'assets/Newt4.jpeg',
     'assets/Newt5.jpeg',
-    'assets/Newt6.jpeg'
+    'assets/Newt6.jpeg',
+    'assets/Newt7.jpeg',
+    'assets/Newt8.jpeg',
+    'assets/Newt9.jpeg'
   ];
   const daysSinceEpoch = Math.floor(Date.now() / (1000*60*60*24));
   const photoIndex = daysSinceEpoch % photoUrls.length;
