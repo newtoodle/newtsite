@@ -82,38 +82,54 @@ function initContactForm(){
   });
 }
 
-// Updates (localStorage)
-function loadUpdates(){
-  try{ return JSON.parse(localStorage.getItem(UPDATES_KEY)||'[]'); }catch{return []}
+// Updates (JSON file)
+let _updatesCache = null;
+async function loadUpdates(){
+  if(_updatesCache) return _updatesCache;
+  try{
+    const resp = await fetch('updates.json?_=' + Date.now());
+    if(!resp.ok) return [];
+    _updatesCache = await resp.json();
+    return _updatesCache;
+  }catch(e){
+    console.error('Failed to load updates:', e);
+    return [];
+  }
 }
-function saveUpdates(list){ localStorage.setItem(UPDATES_KEY, JSON.stringify(list)); }
 function renderUpdates(){
-  const list = loadUpdates();
-  const container = document.getElementById('updates-list');
-  if(!container) return;
-  container.innerHTML = '';
-  list.slice().reverse().forEach(u=>{
-    const el = document.createElement('div'); el.className='update-block'; el.innerHTML = `<time>${new Date(u.t).toLocaleString()}</time><p>${u.text}</p>`; container.appendChild(el);
+  loadUpdates().then(list => {
+    const container = document.getElementById('updates-list');
+    if(!container) return;
+    container.innerHTML = '';
+    list.slice().reverse().forEach(u=>{
+      const el = document.createElement('div'); el.className='update-block'; el.innerHTML = `<time>${new Date(u.t).toLocaleString()}</time><p>${u.text}</p>`; container.appendChild(el);
+    });
   });
 }
 function initUpdates(){
   const form = document.getElementById('update-form');
   if(form){
     form.addEventListener('submit', (e)=>{
-    e.preventDefault();
+      e.preventDefault();
       const text = (form.querySelector('textarea[name=update]')||{}).value||'';
       if(!text.trim()) return;
-      const list = loadUpdates(); list.push({t:Date.now(), text}); saveUpdates(list); form.reset(); renderUpdates();
+      
+      // Generate the new update object
+      const newUpdate = {t: Date.now(), text: text.trim()};
+      
+      // Show instructions for manual editing
+      const instructions = `To add this update, edit the updates.json file in VS Code:\n\nAdd this entry at the end of the array (before the closing bracket):\n\n,\n${JSON.stringify(newUpdate, null, 2)}\n\nThen refresh the page.`;
+      alert(instructions);
+      
+      // Copy to clipboard if available
+      if(navigator.clipboard){
+        const copyText = `,\n${JSON.stringify(newUpdate, null, 2)}`;
+        navigator.clipboard.writeText(copyText).then(()=>{
+          alert('Update JSON copied to clipboard! Paste it into updates.json in VS Code.');
+        }).catch(()=>{});
+      }
     });
   }
-  // Seed a first post if none exist
-  try{
-    const existing = loadUpdates();
-    if(!existing || existing.length === 0){
-      existing.push({ t: new Date(2025,11,22,14,30,0).getTime(), text: 'Just finished making this here website. Newt and I will be monitoring your messages, questions, and emails. i love him so much . .' });
-      saveUpdates(existing);
-    }
-  }catch(e){ /* ignore */ }
   renderUpdates();
 }
 
