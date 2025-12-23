@@ -262,7 +262,7 @@ async function initVisitCounter(){
 function loadFAQ(){ try{ return JSON.parse(localStorage.getItem(FAQ_KEY)||'[]'); }catch{return []} }
 function saveFAQ(list){ localStorage.setItem(FAQ_KEY, JSON.stringify(list)); }
 function formatDate(ts){ try{ return new Date(ts).toLocaleString(undefined,{year:'numeric',month:'short',day:'2-digit',hour:'numeric',minute:'2-digit'}); }catch{return ''} }
-async function renderFAQ(remoteList, remoteIds){
+async function renderFAQ(remoteList){
   const container = document.getElementById('faq-list');
   if(!container) return;
   container.innerHTML = '';
@@ -273,7 +273,6 @@ async function renderFAQ(remoteList, remoteIds){
       try{
         const snap = await db.collection('faq').orderBy('t','desc').get();
         list = snap.docs.map(d=>Object.assign({ _id: d.id }, d.data()));
-        remoteIds = snap.docs.map(d=>d.id);
       }catch(e){ console.warn('Fetching FAQ from cloud failed, falling back to local', e); list = loadFAQ(); }
     } else {
       list = loadFAQ();
@@ -281,7 +280,12 @@ async function renderFAQ(remoteList, remoteIds){
   }
   // admin detection
   const adminMode = (location.search||'').includes('admin=1') || !!window.FIREBASE_ADMIN_TOKEN;
+  console.log('FAQ Debug - adminMode:', adminMode);
+  console.log('FAQ Debug - total items:', list.length);
+  console.log('FAQ Debug - items:', list);
   const visible = list.filter(e=> adminMode ? true : (e.approved === undefined ? true : e.approved === true));
+  console.log('FAQ Debug - visible items:', visible.length);
+  console.log('FAQ Debug - visible:', visible);
   if(!visible || !visible.length){ container.innerHTML = '<p>No community questions yet. Be the first!</p>'; return; }
   visible.forEach((q, idx)=>{
     const el = document.createElement('div');
@@ -289,8 +293,8 @@ async function renderFAQ(remoteList, remoteIds){
     const answered = q.a && q.a.trim().length>0;
     const askedOn = q.t ? formatDate(q.t) : '';
     const answeredOn = q.aT ? formatDate(q.aT) : '';
-    // When rendering cloud results, include data-id for updates; otherwise use index
-    const idAttr = remoteIds && remoteIds[idx] ? `data-id="${remoteIds[idx]}"` : `data-answer="${idx}"`;
+    // Use _id from object if available, otherwise use index
+    const idAttr = q._id ? `data-id="${q._id}"` : `data-answer="${idx}"`;
     let inner = `
       <p><strong>Q:</strong> ${q.q}</p>
       ${askedOn ? `<p class="meta">Asked ${askedOn}</p>` : ''}
@@ -356,8 +360,7 @@ async function initFAQ(){
     try{
       db.collection('faq').orderBy('t','desc').onSnapshot(snap=>{
         const list = snap.docs.map(d=>Object.assign({ _id: d.id }, d.data()));
-        const ids = snap.docs.map(d=>d.id);
-        renderFAQ(list, ids);
+        renderFAQ(list);
       });
       return;
     }catch(e){ console.warn('Realtime subscription for FAQ failed', e); }
@@ -608,7 +611,7 @@ async function initGuestbook(){
   if(db){
     try{
       db.collection('guestbook').orderBy('t','desc').onSnapshot(snap=>{
-        const list = snap.docs.map(d=>d.data());
+        const list = snap.docs.map(d=>Object.assign({ _id: d.id }, d.data()));
         renderGuestbook(list);
       });
       return;
