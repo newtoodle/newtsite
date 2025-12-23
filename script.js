@@ -70,11 +70,23 @@ function initNav(){
   const overlay = document.getElementById('nav-overlay');
   if(!btn||!nav) return;
   btn.addEventListener('click', ()=>{
-    const open = nav.classList.toggle('open');
-    btn.setAttribute('aria-expanded', String(open));
-    if(open){overlay.hidden=false;overlay.addEventListener('click', close);document.body.style.overflow='hidden'} else {close()}
+    const isHidden = nav.getAttribute('aria-hidden') === 'true';
+    nav.setAttribute('aria-hidden', String(!isHidden));
+    btn.setAttribute('aria-expanded', String(isHidden));
+    if(isHidden){
+      overlay.hidden=false;
+      overlay.addEventListener('click', close);
+      document.body.style.overflow='hidden';
+    } else {
+      close();
+    }
   });
-  function close(){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');overlay.hidden=true;document.body.style.overflow=''}
+  function close(){
+    nav.setAttribute('aria-hidden','true');
+    btn.setAttribute('aria-expanded','false');
+    overlay.hidden=true;
+    document.body.style.overflow='';
+  }
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
 }
 

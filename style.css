@@ -87,3 +87,42 @@ input[type=checkbox]{vertical-align:middle;margin-left:40px;position:relative;to
 
 /* Additional styles can be added below */
 
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  #nav-toggle {
+    display: block;
+    cursor: pointer;
+    z-index: 51;
+  }
+  
+  .main-nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    max-width: 280px;
+    height: 100vh;
+    background: var(--card);
+    flex-direction: column;
+    gap: 0;
+    padding: 80px 20px 20px;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 50;
+  }
+  
+  .main-nav[aria-hidden="false"] {
+    transform: translateX(0);
+  }
+  
+  .main-nav a {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .main-nav a:last-child {
+    border-bottom: none;
+  }
+}
+
