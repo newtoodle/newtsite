@@ -355,7 +355,7 @@ async function initFAQ(){
   if(db){
     try{
       db.collection('faq').orderBy('t','desc').onSnapshot(snap=>{
-        const list = snap.docs.map(d=>d.data());
+        const list = snap.docs.map(d=>Object.assign({ _id: d.id }, d.data()));
         const ids = snap.docs.map(d=>d.id);
         renderFAQ(list, ids);
       });
