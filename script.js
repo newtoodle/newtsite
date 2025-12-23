@@ -514,6 +514,7 @@ async function initGuestbook(){
   let drawing = false;
   let currentColor = '#000';
   let currentSize = 4;
+  let isEraser = false;
   
   // Set canvas size to match display
   const rect = canvas.getBoundingClientRect();
@@ -531,6 +532,7 @@ async function initGuestbook(){
   function updateColor(color){
     if(/^#[0-9A-Fa-f]{6}$/.test(color)){
       currentColor = color;
+      isEraser = false;
       if(colorPicker) colorPicker.value = color;
     }
   }
@@ -539,6 +541,11 @@ async function initGuestbook(){
   document.getElementById('pen-black')?.addEventListener('click', ()=>updateColor('#000000'));
   document.getElementById('pen-red')?.addEventListener('click', ()=>updateColor('#c0392b'));
   document.getElementById('pen-blue')?.addEventListener('click', ()=>updateColor('#2980b9'));
+  
+  // Eraser button
+  document.getElementById('eraser')?.addEventListener('click', ()=>{
+    isEraser = true;
+  });
   
   // Color picker
   colorPicker?.addEventListener('input', (e)=>updateColor(e.target.value));
@@ -556,8 +563,15 @@ async function initGuestbook(){
     const pos = getPos(e);
     ctx.beginPath();
     ctx.moveTo(pos.x, pos.y);
-    ctx.strokeStyle = currentColor;
-    ctx.lineWidth = currentSize;
+    if(isEraser){
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.strokeStyle = 'rgba(0,0,0,1)';
+      ctx.lineWidth = currentSize * 2;
+    } else {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = currentColor;
+      ctx.lineWidth = currentSize;
+    }
   }
   function draw(e){
     if(!drawing) return;
