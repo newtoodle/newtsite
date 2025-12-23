@@ -17,7 +17,16 @@ async function ensureFirebase(){
   const cfg = window.FIREBASE_CONFIG;
   if(!cfg) return null;
   if(window.firebase && window.firebase.firestore){
-    try{ if(!window.firebase.apps.length) window.firebase.initializeApp(cfg); window._firestore = window.firebase.firestore(); return window._firestore; }catch(e){ console.error('Firebase init error', e); return null; }
+    try{ 
+      if(!window.firebase.apps.length) {
+        window.firebase.initializeApp(cfg);
+      }
+      window._firestore = window.firebase.firestore(); 
+      return window._firestore; 
+    }catch(e){ 
+      console.error('Firebase init error', e); 
+      return null; 
+    }
   }
   // Dynamically load compat SDKs
   await new Promise((res, rej)=>{
@@ -34,7 +43,9 @@ async function ensureFirebase(){
     document.head.appendChild(s1);
   }).catch((e)=>{ console.warn('Failed to load Firebase SDKs', e); return null; });
   try{
-    if(!window.firebase.apps.length) window.firebase.initializeApp(cfg);
+    if(!window.firebase.apps.length) {
+      window.firebase.initializeApp(cfg);
+    }
     window._firestore = window.firebase.firestore();
     return window._firestore;
   }catch(e){ console.error('Firebase init error', e); return null; }
