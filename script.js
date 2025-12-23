@@ -801,8 +801,6 @@ async function renderFAQ(remoteList){
     if(adminMode){
       const status = (q.approved===true) ? '<em style="color:green">Approved</em>' : '<em style="color:orange">Pending</em>';
       inner += `<p>${status} <button class="btn" ${idAttr} style="margin-left:12px">Answer</button> <button class="btn" data-approve-id="${q._id||''}">Approve</button> <button class="btn" data-delete-id="${q._id||''}">Delete</button></p>`;
-    } else {
-      inner += `<p><button class="btn" ${idAttr}>Answer</button></p>`;
     }
     el.innerHTML = inner;
     container.appendChild(el);
