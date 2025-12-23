@@ -431,8 +431,14 @@ async function loadBarks(postId, container){
     const barkEl = document.createElement('div');
     barkEl.className = 'bark-item';
     barkEl.innerHTML = `
-      <p><strong>${bark.name}</strong> <span class="meta">${new Date(bark.t).toLocaleString()}</span></p>
-      <p style="margin-top:4px;">${bark.message}</p>
+      <div class="bark-item-header">
+        <div class="bark-item-avatar">🐾</div>
+        <div class="bark-item-user-info">
+          <span class="bark-item-name">${bark.name}</span>
+          <span class="bark-item-meta">${new Date(bark.t).toLocaleString()}</span>
+        </div>
+      </div>
+      <p class="bark-item-message">${bark.message}</p>
     `;
     if(bark.id){
       barkEl.dataset.barkId = bark.id;
@@ -480,8 +486,14 @@ async function loadBarksPublic(postId, container){
     const barkEl = document.createElement('div');
     barkEl.className = 'bark-item';
     barkEl.innerHTML = `
-      <p><strong>${bark.name}</strong> <span class="meta">${new Date(bark.t).toLocaleString()}</span></p>
-      <p style="margin-top:4px;">${bark.message}</p>
+      <div class="bark-item-header">
+        <div class="bark-item-avatar">🐾</div>
+        <div class="bark-item-user-info">
+          <span class="bark-item-name">${bark.name}</span>
+          <span class="bark-item-meta">${new Date(bark.t).toLocaleString()}</span>
+        </div>
+      </div>
+      <p class="bark-item-message">${bark.message}</p>
     `;
     if(bark.id){
       barkEl.dataset.barkId = bark.id;
