@@ -197,7 +197,32 @@ function initTreatsCounter(){
 document.addEventListener('DOMContentLoaded', ()=>{
   updateAge(); setInterval(updateAge, 60*1000);
   initNav(); initContactForm(); initUpdates(); initSkillTree(); initFAQ(); initWeightConverter(); initTreatsCounter(); initStatusWidget(); initPhotoOfDay(); initNicknames(); initGuestbook();
+  initVisitCounter();
 });
+
+// Visit counter: display and optionally call Cloud Function to increment
+async function initVisitCounter(){
+  const container = document.createElement('div');
+  container.id = 'visit-counter';
+  container.style = 'position:fixed;right:12px;bottom:12px;background:rgba(255,255,255,0.9);padding:8px 10px;border-radius:8px;border:1px solid var(--border);font-size:13px;box-shadow:0 6px 18px rgba(0,0,0,0.06);z-index:1000';
+  container.textContent = 'Visits: …';
+  document.body.appendChild(container);
+  // If a functions URL is provided, call increment endpoint; otherwise read Firestore doc for count
+  try{
+    if(window.FIREBASE_FUNCTIONS_URL){
+      const resp = await fetch((window.FIREBASE_FUNCTIONS_URL.replace(/\/$/,'')) + '/incrementVisit', { method: 'POST' });
+      const json = await resp.json();
+      if(json && typeof json.count !== 'undefined') container.textContent = `Visits: ${json.count}`;
+      return;
+    }
+    const db = await ensureFirebase();
+    if(db){
+      const doc = await db.doc('metrics/visits').get();
+      const count = (doc.exists && doc.data().count) ? doc.data().count : 0;
+      container.textContent = `Visits: ${count}`;
+    }
+  }catch(e){ console.warn('Visit counter error', e); }
+}
 
 // FAQ (localStorage-backed public list on this device)
 function loadFAQ(){ try{ return JSON.parse(localStorage.getItem(FAQ_KEY)||'[]'); }catch{return []} }
@@ -213,15 +238,18 @@ async function renderFAQ(remoteList, remoteIds){
     if(db){
       try{
         const snap = await db.collection('faq').orderBy('t','desc').get();
-        list = snap.docs.map(d=>d.data());
+        list = snap.docs.map(d=>Object.assign({ _id: d.id }, d.data()));
         remoteIds = snap.docs.map(d=>d.id);
       }catch(e){ console.warn('Fetching FAQ from cloud failed, falling back to local', e); list = loadFAQ(); }
     } else {
       list = loadFAQ();
     }
   }
-  if(!list || !list.length){ container.innerHTML = '<p>No community questions yet. Be the first!</p>'; return; }
-  list.forEach((q, idx)=>{
+  // admin detection
+  const adminMode = (location.search||'').includes('admin=1') || !!window.FIREBASE_ADMIN_TOKEN;
+  const visible = list.filter(e=> adminMode ? true : (e.approved === undefined ? true : e.approved === true));
+  if(!visible || !visible.length){ container.innerHTML = '<p>No community questions yet. Be the first!</p>'; return; }
+  visible.forEach((q, idx)=>{
     const el = document.createElement('div');
     el.className = 'update-block';
     const answered = q.a && q.a.trim().length>0;
@@ -229,12 +257,18 @@ async function renderFAQ(remoteList, remoteIds){
     const answeredOn = q.aT ? formatDate(q.aT) : '';
     // When rendering cloud results, include data-id for updates; otherwise use index
     const idAttr = remoteIds && remoteIds[idx] ? `data-id="${remoteIds[idx]}"` : `data-answer="${idx}"`;
-    el.innerHTML = `
+    let inner = `
       <p><strong>Q:</strong> ${q.q}</p>
       ${askedOn ? `<p class="meta">Asked ${askedOn}</p>` : ''}
       ${answered ? `<p><strong>A:</strong> ${q.a}</p>${answeredOn ? `<p class="meta">Answered ${answeredOn}</p>` : ''}` : `<p><em>Unanswered</em></p>`}
-      <p><button class="btn" ${idAttr}>Answer</button></p>
     `;
+    if(adminMode){
+      const status = (q.approved===true) ? '<em style="color:green">Approved</em>' : '<em style="color:orange">Pending</em>';
+      inner += `<p>${status} <button class="btn" ${idAttr} style="margin-left:12px">Answer</button> <button class="btn" data-approve-id="${q._id||''}">Approve</button> <button class="btn" data-delete-id="${q._id||''}">Delete</button></p>`;
+    } else {
+      inner += `<p><button class="btn" ${idAttr}>Answer</button></p>`;
+    }
+    el.innerHTML = inner;
     container.appendChild(el);
   });
   container.onclick = async (e)=>{
@@ -255,6 +289,15 @@ async function renderFAQ(remoteList, remoteIds){
     const data = loadFAQ(); const item = data[data.length-1 - i]; if(!item) return;
     item.a = a; item.aT = Date.now(); saveFAQ(data); renderFAQ();
   };
+  // Admin approve/delete handlers
+  container.addEventListener('click', async (e)=>{
+    const approveId = e.target.closest('button[data-approve-id]')?.getAttribute('data-approve-id');
+    const deleteId = e.target.closest('button[data-delete-id]')?.getAttribute('data-delete-id');
+    if(!approveId && !deleteId) return;
+    const db = await ensureFirebase();
+    if(approveId && db){ try{ await db.collection('faq').doc(approveId).update({ approved: true }); return; }catch(err){ console.warn('Approve failed', err); } }
+    if(deleteId && db){ try{ await db.collection('faq').doc(deleteId).delete(); return; }catch(err){ console.warn('Delete failed', err); } }
+  });
 }
 
 async function initFAQ(){
@@ -267,7 +310,7 @@ async function initFAQ(){
       (async ()=>{
         const db = await ensureFirebase();
         if(db){
-          try{ await db.collection('faq').add({ t: Date.now(), q, a: '', aT: null }); form.reset(); return; }catch(e){ console.warn('Cloud write failed, saving locally', e); }
+          try{ await db.collection('faq').add({ t: Date.now(), q, a: '', aT: null, approved: false }); form.reset(); return; }catch(e){ console.warn('Cloud write failed, saving locally', e); }
         }
         const list = loadFAQ(); list.push({ t: Date.now(), q, a: '', aT: null }); saveFAQ(list); form.reset(); renderFAQ();
       })();
@@ -359,14 +402,19 @@ async function renderGuestbook(remoteList){
     if(db){
       try{
         const snap = await db.collection('guestbook').orderBy('t','desc').get();
-        list = snap.docs.map(d=>d.data());
+        // keep ids alongside data for admin actions
+        list = snap.docs.map(d=>Object.assign({ _id: d.id }, d.data()));
       }catch(e){ console.warn('Fetching guestbook from cloud failed, falling back to local', e); list = loadGuestbook(); }
     } else {
       list = loadGuestbook();
     }
   }
-  if(!list || !list.length){ container.innerHTML = '<p>No messages yet. Be the first to sign!</p>'; return; }
-  list.forEach(entry=>{
+  // Detect admin mode (admin=1 query or FIREBASE_ADMIN_TOKEN present)
+  const adminMode = (location.search||'').includes('admin=1') || !!window.FIREBASE_ADMIN_TOKEN;
+  // For backwards compatibility, local entries without `approved` are considered approved
+  const visible = list.filter(e=> adminMode ? true : (e.approved === undefined ? true : e.approved === true));
+  if(!visible || !visible.length){ container.innerHTML = '<p>No messages yet. Be the first to sign!</p>'; return; }
+  visible.forEach(entry=>{
     const el = document.createElement('div');
     el.className = 'update-block';
     const ts = entry.t ? new Date(entry.t).toLocaleString() : new Date().toLocaleString();
@@ -375,9 +423,36 @@ async function renderGuestbook(remoteList){
     if(entry.drawing){
       html += `<img src="${entry.drawing}" alt="Drawing by ${entry.name}" style="max-width:100%;border-radius:8px;margin-top:8px;border:1px solid var(--border);">`;
     }
+    // If admin, add approve/delete controls and show approval status
+    if(adminMode){
+      const status = (entry.approved===true) ? '<em style="color:green">Approved</em>' : '<em style="color:orange">Pending</em>';
+      html = `<div style="display:flex;justify-content:space-between;align-items:center;">${html}<span style="margin-left:12px">${status}</span></div>`;
+      html += `<p style="margin-top:8px;"><button class="btn" data-approve-id="${entry._id||''}">Approve</button> <button class="btn" data-delete-id="${entry._id||''}">Delete</button></p>`;
+    }
     el.innerHTML = html;
     container.appendChild(el);
   });
+  // Admin actions
+  if(adminMode){
+    container.addEventListener('click', async (e)=>{
+      const approveId = e.target.closest('button[data-approve-id]')?.getAttribute('data-approve-id');
+      const deleteId = e.target.closest('button[data-delete-id]')?.getAttribute('data-delete-id');
+      const db = await ensureFirebase();
+      if(approveId && db){
+        try{ await db.collection('guestbook').doc(approveId).update({ approved: true }); return; }catch(err){ console.warn('Approve failed', err); }
+      }
+      if(deleteId && db){
+        try{ await db.collection('guestbook').doc(deleteId).delete(); return; }catch(err){ console.warn('Delete failed', err); }
+      }
+      // local fallback actions (index by timestamp) — rebuild local list
+      if(approveId==='' || deleteId===''){
+        const key = GUESTBOOK_KEY;
+        const data = loadGuestbook();
+        // nothing to do without id mapping; just refresh
+        renderGuestbook(data);
+      }
+    });
+  }
 }
 
 async function initGuestbook(){
@@ -477,13 +552,15 @@ async function initGuestbook(){
       const db = await ensureFirebase();
       if(db){
         try{
-          await db.collection('guestbook').add({ t: Date.now(), name, message, drawing });
+          // mark cloud submissions as unapproved until you approve them
+          await db.collection('guestbook').add({ t: Date.now(), name, message, drawing, approved: false });
           form.reset(); ctx.clearRect(0,0,canvas.width,canvas.height);
           return; // onSnapshot listener or subsequent fetch will update UI
         }catch(e){ console.warn('Cloud write failed, saving locally', e); }
       }
       const list = loadGuestbook();
-      list.push({ t: Date.now(), name, message, drawing });
+      // local saves are considered approved so existing behavior remains
+      list.push({ t: Date.now(), name, message, drawing, approved: true });
       saveGuestbook(list);
       form.reset(); ctx.clearRect(0,0,canvas.width,canvas.height);
       renderGuestbook();

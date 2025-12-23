@@ -58,3 +58,62 @@ Security notes
 - Avoid committing `firebase-config.js` with production keys into public repos if you want to reduce risk.
 
 If you want, tell me the Firebase `config` (or paste the `firebase-config.js` content) and I will add it into the repo locally for you, or I can guide you step-by-step for your DNS/HTTPS tasks next.
+
+Moderation and notifications
+
+This project supports a simple moderation workflow:
+
+- Submissions written to Firestore are saved with `approved: false` by default.
+- Public pages show only entries where `approved === true` (localStorage entries without the flag are treated as approved for backward compatibility).
+- You can review and approve entries by visiting the public pages with `?admin=1` appended to the URL (e.g., `https://newt.dog/guestbook.html?admin=1`). That enables approve/delete buttons next to each submission.
+
+Recommended production setup
+
+- Use Firebase Authentication for a proper admin sign-in flow and update Firestore security rules so only authenticated admin users can write the `approved` flag. Example rule fragment:
+
+```
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /guestbook/{docId} {
+      allow read: if true;
+      allow create: if true; // or require some validation
+      allow update, delete: if request.auth != null && request.auth.token.admin == true;
+    }
+    match /faq/{docId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if request.auth != null && request.auth.token.admin == true;
+    }
+  }
+}
+```
+
+Set custom claims for your admin account via the Firebase Admin SDK (server side) to include `admin: true`.
+
+Email notifications (optional)
+
+To receive email notifications for new submissions, create a Firebase Cloud Function triggered on document create and use an email provider (SendGrid, Mailgun, etc.) to send mail. Example Node.js Cloud Function (index.js):
+
+```javascript
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const sgMail = require('@sendgrid/mail');
+
+admin.initializeApp();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+exports.notifyGuestbook = functions.firestore.document('guestbook/{docId}').onCreate(async (snap, ctx) => {
+  const data = snap.data();
+  const msg = {
+    to: 'your-email@example.com',
+    from: 'no-reply@newt.dog',
+    subject: `New guestbook entry from ${data.name}`,
+    text: `${data.name} wrote:\n\n${data.message}`
+  };
+  await sgMail.send(msg);
+});
+```
+
+Deploy the function and set `SENDGRID_API_KEY` as an environment variable in your Functions settings.
+
+If you'd like, I can help generate that Cloud Function and guide you through deploying it.
