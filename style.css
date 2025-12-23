@@ -8,10 +8,11 @@
 	--glass:rgba(255,255,255,0.85);
 }
 *{box-sizing:border-box}
-body{font-family:Spectral,serif;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--muted);line-height:1.4;cursor:url('assets/paw-cursor-brown.png') 12 12, auto}
+html{overflow-x:hidden}
+body{font-family:Spectral,serif;margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:var(--muted);line-height:1.4;cursor:url('assets/paw-cursor-brown.png') 12 12, auto;overflow-x:hidden;width:100%}
 *, *::before, *::after {cursor:url('assets/paw-cursor-brown.png') 12 12, auto !important}
 a{color:var(--accent-2)}
-.site-header{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:8px 18px;background:var(--bg);backdrop-filter:blur(10px);border-bottom:1px solid rgba(145,132,118,0.1);box-shadow:0 2px 8px rgba(85,60,45,0.05)}
+.site-header{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:8px 18px;background:var(--bg);backdrop-filter:blur(10px);border-bottom:1px solid rgba(145,132,118,0.1);box-shadow:0 2px 8px rgba(85,60,45,0.05);width:100%}
 .brand{display:flex;align-items:center;gap:12px}
 .logo{height:64px}
 h1{font-family:Cinzel,serif;margin:0;font-size:1.2rem;color:var(--accent-2)}
@@ -589,10 +590,16 @@ input[type=checkbox]{vertical-align:middle;margin-left:40px;position:relative;to
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {
+  .site-header {
+    justify-content: space-between;
+  }
+
   #nav-toggle {
     display: block;
     cursor: pointer;
     z-index: 51;
+    position: relative;
+    margin-left: auto;
   }
   
   .main-nav {
@@ -633,5 +640,18 @@ input[type=checkbox]{vertical-align:middle;margin-left:40px;position:relative;to
     z-index: 9999 !important;
     max-width: calc(100vw - 20px);
   }
-}
 
+  /* MS Paint mobile adjustments */
+  #drawing-canvas {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 250px;
+  }
+
+  .paint-tool, #undo-btn, #redo-btn, #clear-canvas {
+    min-width: 36px !important;
+    min-height: 36px !important;
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+  }

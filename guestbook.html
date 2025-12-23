@@ -27,9 +27,9 @@
         <label style="display:block;margin-bottom:8px;font-weight:600;">Draw Something (optional)</label>
         
         <!-- MS Paint Style Toolbar -->
-        <div style="background:#f0f0f0;border:2px solid #ccc;padding:8px;border-radius:4px;margin-bottom:8px;">
+        <div style="background:#f0f0f0;border:2px solid #ccc;padding:8px;border-radius:4px;margin-bottom:8px;overflow-x:auto;">
           <!-- Tools Row -->
-          <div style="display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap;">
+          <div style="display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap;min-width:min-content;">
             <button type="button" class="paint-tool active" data-tool="pencil" title="Pencil" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">✏️</button>
             <button type="button" class="paint-tool" data-tool="brush" title="Brush" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;font-size:20px;">🖌️</button>
             <button type="button" class="paint-tool" data-tool="eraser" title="Eraser" style="width:40px;height:40px;border:2px solid #999;background:#fff;cursor:pointer;padding:4px;"><img src="assets/eraser.png" style="width:100%;height:100%;object-fit:contain;"></button>
@@ -46,7 +46,7 @@
           </div>
           
           <!-- Size and Fill Options -->
-          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
             <div>
               <label style="font-size:12px;display:block;margin-bottom:2px;">Size:</label>
               <select id="pen-size" style="padding:4px 8px;border:1px solid #999;background:#fff;cursor:pointer;">
@@ -94,7 +94,7 @@
           </div>
           
           <!-- Color Palette -->
-          <div style="display:flex;gap:8px;align-items:center;">
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
             <div style="display:flex;align-items:center;gap:4px;">
               <div style="text-align:center;">
                 <div style="font-size:10px;margin-bottom:2px;">Primary</div>
@@ -104,36 +104,6 @@
                 <div style="font-size:10px;margin-bottom:2px;">Secondary</div>
                 <div id="secondary-color-display" style="width:30px;height:30px;border:2px solid #000;background:#fff;"></div>
               </div>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(14, 20px);gap:2px;">
-              <div class="color-swatch" data-color="#000000" style="width:20px;height:20px;background:#000000;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#808080" style="width:20px;height:20px;background:#808080;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#800000" style="width:20px;height:20px;background:#800000;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ff0000" style="width:20px;height:20px;background:#ff0000;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#808000" style="width:20px;height:20px;background:#808000;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ffff00" style="width:20px;height:20px;background:#ffff00;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#008000" style="width:20px;height:20px;background:#008000;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#00ff00" style="width:20px;height:20px;background:#00ff00;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#008080" style="width:20px;height:20px;background:#008080;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#00ffff" style="width:20px;height:20px;background:#00ffff;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#000080" style="width:20px;height:20px;background:#000080;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#0000ff" style="width:20px;height:20px;background:#0000ff;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#800080" style="width:20px;height:20px;background:#800080;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ff00ff" style="width:20px;height:20px;background:#ff00ff;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ffffff" style="width:20px;height:20px;background:#ffffff;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#c0c0c0" style="width:20px;height:20px;background:#c0c0c0;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ff8080" style="width:20px;height:20px;background:#ff8080;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ffc0c0" style="width:20px;height:20px;background:#ffc0c0;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ffff80" style="width:20px;height:20px;background:#ffff80;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ffffc0" style="width:20px;height:20px;background:#ffffc0;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#80ff80" style="width:20px;height:20px;background:#80ff80;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#c0ffc0" style="width:20px;height:20px;background:#c0ffc0;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#80ffff" style="width:20px;height:20px;background:#80ffff;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#c0ffff" style="width:20px;height:20px;background:#c0ffff;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#8080ff" style="width:20px;height:20px;background:#8080ff;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#c0c0ff" style="width:20px;height:20px;background:#c0c0ff;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ff80ff" style="width:20px;height:20px;background:#ff80ff;border:1px solid #999;cursor:pointer;"></div>
-              <div class="color-swatch" data-color="#ffc0ff" style="width:20px;height:20px;background:#ffc0ff;border:1px solid #999;cursor:pointer;"></div>
             </div>
             <input type="color" id="color-picker" value="#000000" style="width:40px;height:40px;border:1px solid #999;cursor:pointer;" title="Custom color">
           </div>
