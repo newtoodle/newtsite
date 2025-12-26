@@ -159,6 +159,7 @@ function renderUpdates(){
           </div>
         </div>
         <p style="margin:12px 0;">${u.text}</p>
+        ${u.photo ? `<img src="${u.photo}" alt="Newtter post image" class="newtter-photo" style="max-width:100%;border-radius:12px;margin:10px 0;">` : ''}
         <time class="meta" style="font-size:0.8rem;display:block;margin-top:8px;">${new Date(u.t).toLocaleString()}</time>
         <div class="newtter-actions">
           <button class="newtter-btn renewt-btn" data-post-id="${postId}" title="Re-Newt (Share)">

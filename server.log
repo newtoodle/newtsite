@@ -7862,3 +7862,773 @@
 ::1 - - [23/Dec/2025 11:38:50] "GET /updates.json?_=1766518730569 HTTP/1.1" 200 -
 ::1 - - [23/Dec/2025 11:38:53] "GET /updates.html HTTP/1.1" 304 -
 ::1 - - [23/Dec/2025 11:38:53] "GET /updates.json?_=1766518733652 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:15:16] "GET /index.html HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 12:15:16] "GET /style.css HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:15:16] "GET /script.js HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:15:16] "GET /updates.json?_=1766520916700 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:15:18] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 12:15:18] "GET /assets/Newt8.jpeg HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 12:15:18] "GET /updates.json?_=1766520918318 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:15:18] "GET /updates.json?_=1766520918861 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:16:36] "GET /updates.html HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:16:36] "GET /style.css HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:16:36] "GET /script.js HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:16:36] "GET /updates.json?_=1766520996486 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 12:17:20] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 12:17:20] "GET /style.css HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 12:17:20] "GET /script.js HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 12:17:20] "GET /updates.json?_=1766521040667 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 14:04:08] "GET /index.html HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:08] "GET /style.css HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:08] "GET /assets/logo.PNG HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:08] "GET /assets/NewtterLogo1.png HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:08] "GET /assets/instagram-icon.svg HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:08] "GET /assets/og-image.svg HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:08] "GET /firebase-config.js HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:08] "GET /assets/mail-icon.svg HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:08] "GET /script.js HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 14:04:08] "GET /updates.json?_=1766527448534 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 14:04:08] "GET /assets/paw-cursor-brown.png HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:08] "GET /assets/Newt7.jpeg HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:09] "GET /manifest.json HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 14:04:10] "GET /guestbook.html HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 14:04:10] "GET /assets/eraser.png HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 14:04:10] "GET /assets/spray.png HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 14:04:10] "GET /updates.json?_=1766527450868 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 14:08:17] "GET /guestbook.html HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 14:08:17] "GET /updates.json?_=1766527697727 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 19:12:09] "GET /index.html HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 19:12:10] "GET /assets/logo.PNG HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 19:12:10] "GET /style.css HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 19:12:10] "GET /assets/NewtterLogo1.png HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 19:12:10] "GET /assets/instagram-icon.svg HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 19:12:10] "GET /assets/og-image.svg HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 19:12:10] "GET /firebase-config.js HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 19:12:10] "GET /assets/mail-icon.svg HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 19:12:10] "GET /script.js HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 19:12:10] "GET /assets/paw-cursor-brown.png HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 19:12:10] "GET /updates.json?_=1766545930100 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 19:12:10] "GET /assets/Newt8.jpeg HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 19:12:10] "GET /manifest.json HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 20:09:37] "GET /updates.json?_=1766549377498 HTTP/1.1" 200 -
+::1 - - [23/Dec/2025 20:49:27] "GET /index.html HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 20:49:27] "GET /style.css HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 20:49:27] "GET /script.js HTTP/1.1" 304 -
+::1 - - [23/Dec/2025 20:49:27] "GET /updates.json?_=1766551767587 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:01:49] "GET /index.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:49] "GET /assets/logo.PNG HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:01:49] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:49] "GET /assets/NewtterLogo1.png HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:49] "GET /assets/instagram-icon.svg HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:49] "GET /assets/mail-icon.svg HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:49] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:49] "GET /firebase-config.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:49] "GET /assets/og-image.svg HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:49] "GET /assets/paw-cursor-brown.png HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:49] "GET /updates.json?_=1766725309612 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:01:49] "GET /assets/Newt1.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:01:49] "GET /manifest.json HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:51] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:01:51] "GET /assets/pfp.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:01:51] "GET /updates.json?_=1766725311206 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:01:51] "GET /assets/newtheader.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:03:12] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:03:12] "GET /updates.json?_=1766725392869 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:04:11] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:04:11] "GET /updates.json?_=1766725451504 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:04:19] "GET /updates.json?_=1766725459085 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:04:29] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:04:29] "GET /updates.json?_=1766725469601 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:04:30] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:04:30] "GET /updates.json?_=1766725470508 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:05:07] code 404, message File not found
+::1 - - [25/Dec/2025 21:05:07] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:05:46] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:05:46] "GET /updates.json?_=1766725546333 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:05:55] "GET /updates.json?_=1766725555847 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:06:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:06:01] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] "GET /updates.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] "GET /style.css HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /firebase-config.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] "GET /script.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/paw-cursor-brown.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/newtheader.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] "GET /updates.json?_=1766725623312 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/newtter/xmas.PNG HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:03] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:03] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:57] "GET /updates.json?_=1766725677522 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:07:57] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:57] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:59] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:59] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:59] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:59] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:59] "GET /updates.json?_=1766725679658 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:07:59] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:59] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:59] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:59] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:07:59] code 404, message File not found
+::1 - - [25/Dec/2025 21:07:59] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:36] "GET /index.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:36] "GET /assets/ui/logo.PNG HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:36] "GET /assets/ui/NewtterLogo1.png HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:36] "GET /assets/ui/instagram-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:36] "GET /script.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:36] "GET /assets/ui/mail-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:36] "GET /updates.json?_=1766725836722 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:36] "GET /assets/gallery/Newt1.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:37] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:37] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] "GET /updates.json?_=1766725838341 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:38] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:38] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:10:40] "GET /updates.json?_=1766725840170 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:10:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:10:40] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:01] "GET /updates.json?_=1766725861728 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:01] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:01] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /updates.json?_=1766725866282 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:06] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:06] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:07] "GET /faq.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:11:07] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:07] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:07] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:07] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:07] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:07] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:07] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:07] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:07] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:11:07] "GET /updates.json?_=1766725867641 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:07] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:07] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:08] "GET /skills.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:08] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:08] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:08] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:08] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:08] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:08] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:08] "GET /updates.json?_=1766725868345 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:08] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:08] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:08] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:08] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:11] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:11] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:11] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:11] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:11] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:11] "GET /updates.json?_=1766725871105 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:11] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:11] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:11] "GET /assets/newtter/pfp.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:40] "GET /index.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:11:40] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:11:40] "GET /updates.json?_=1766725900098 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:40] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:40] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:41] "GET /updates.json?_=1766725901564 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:41] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:41] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:42] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:42] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:42] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:42] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:42] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:42] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:42] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:42] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:42] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:42] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:42] "GET /updates.json?_=1766725902244 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:42] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:42] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:11:44] "GET /updates.json?_=1766725904065 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:11:44] code 404, message File not found
+::1 - - [25/Dec/2025 21:11:44] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:13:13] "GET /index.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:13:13] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:13:13] "GET /updates.json?_=1766725993627 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:13:13] code 404, message File not found
+::1 - - [25/Dec/2025 21:13:13] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:28] "GET /index.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:14:28] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:14:28] "GET /updates.json?_=1766726068965 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:29] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:29] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:29] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:29] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:29] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:29] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:29] "GET /updates.json?_=1766726069902 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:29] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:31] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:14:31] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:31] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:31] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:31] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:31] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:31] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:31] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:31] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:31] "GET /updates.json?_=1766726071435 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:31] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:31] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:31] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:31] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:33] "GET /updates.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:33] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:33] "GET /style.css HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:33] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:33] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:33] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:33] "GET /firebase-config.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:33] "GET /script.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:33] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:33] "GET /assets/ui/paw-cursor-brown.png HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:33] "GET /assets/newtter/newtheader.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:33] "GET /updates.json?_=1766726073650 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:33] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:33] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:39] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:39] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:39] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:39] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:39] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:39] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:39] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:39] "GET /assets/instagram-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:39] "GET /assets/mail-icon.svg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:39] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:39] "GET /updates.json?_=1766726079573 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:14:39] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:39] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:14:39] code 404, message File not found
+::1 - - [25/Dec/2025 21:14:39] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:11] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:16:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:11] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:11] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:16:11] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:11] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:11] "GET /assets/instagram-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:16:11] "GET /assets/mail-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:16:11] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:16:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:11] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:11] "GET /updates.json?_=1766726171164 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:16:11] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:11] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:45] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:16:45] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:45] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:45] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:45] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:45] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:45] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:45] "GET /updates.json?_=1766726205077 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:16:45] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:45] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:45] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:45] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:46] "GET /index.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:16:46] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:16:46] "GET /updates.json?_=1766726206673 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:16:46] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:46] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:47] "GET /updates.json?_=1766726207573 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:16:47] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:47] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:48] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:48] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:48] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:48] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:48] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:48] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:48] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:48] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:48] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:16:48] "GET /updates.json?_=1766726208267 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:16:48] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:48] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] "GET /updates.json?_=1766726209113 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:16:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:16:49] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] "GET /gallery.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/gallery/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/gallery/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/gallery/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/gallery/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/gallery/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/gallery/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/gallery/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/gallery/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:49] "GET /updates.json?_=1766726269909 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:49] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] "GET /gallery.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /style.css HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] "GET /script.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/instagram-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/mail-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt1.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/ui/paw-cursor-brown.png HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /updates.json?_=1766726274124 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/ui/logo.PNG HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] "GET /gallery.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /style.css HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] "GET /script.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/gallery/Newt1.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/instagram-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/mail-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/ui/paw-cursor-brown.png HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /updates.json?_=1766726274770 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/ui/logo.PNG HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:54] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:54] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] "GET /gallery.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:55] "GET /style.css HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] "GET /script.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/gallery/Newt7.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/gallery/Newt8.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/gallery/Newt9.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/gallery/Newt6.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/gallery/Newt3.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/gallery/Newt5.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/gallery/Newt4.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/gallery/Newt2.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/gallery/Newt1.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/mail-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/instagram-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/ui/paw-cursor-brown.png HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:55] "GET /updates.json?_=1766726275143 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/ui/logo.PNG HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:17:55] code 404, message File not found
+::1 - - [25/Dec/2025 21:17:55] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:46] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:46] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:46] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:46] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:46] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:18:46] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:46] "GET /assets/pfp.jpeg HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:46] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:18:46] "GET /updates.json?_=1766726326659 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:46] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:46] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:46] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:46] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:47] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:18:47] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:47] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/gallery/Newt7.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/gallery/Newt9.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/gallery/Newt8.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/gallery/Newt6.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/gallery/Newt5.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/gallery/Newt4.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/gallery/Newt3.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/gallery/Newt2.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:47] "GET /updates.json?_=1766726327173 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:47] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:47] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:49] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:18:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:49] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:49] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:49] "GET /updates.json?_=1766726329329 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:49] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:49] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:18:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:49] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:49] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:49] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:49] "GET /updates.json?_=1766726329933 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:50] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:50] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:53] "GET /gallery.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:53] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:53] "GET /style.css HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/gallery/Newt8.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/gallery/Newt9.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /script.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/gallery/Newt6.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/gallery/Newt7.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/gallery/Newt5.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/gallery/Newt4.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/gallery/Newt3.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/ui/paw-cursor-brown.png HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /updates.json?_=1766726333415 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/gallery/Newt2.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/instagram-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/gallery/Newt1.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/mail-icon.svg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:18:53] code 404, message File not found
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:18:53] "GET /assets/ui/logo.PNG HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:19:29] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:19:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:29] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:29] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:29] "GET /updates.json?_=1766726369231 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:19:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:29] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:29] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:29] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:29] "GET /updates.json?_=1766726369652 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:19:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:29] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:29] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:29] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:33] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:33] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:33] "GET /updates.json?_=1766726373090 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:19:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:33] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:33] "GET /buy.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:19:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:33] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:33] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:33] "GET /assets/beg.jpg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:19:33] "GET /updates.json?_=1766726373923 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:19:33] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:33] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:34] "GET /guestbook.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:19:34] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:34] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:34] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:34] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:34] "GET /updates.json?_=1766726374874 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:19:34] "GET /assets/eraser.png HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:19:34] "GET /assets/spray.png HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:19:34] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:34] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:19:36] "GET /index.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:19:36] "GET /updates.json?_=1766726376491 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:19:36] code 404, message File not found
+::1 - - [25/Dec/2025 21:19:36] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:20:21] "GET /index.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:20:21] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:20:21] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:20:21] "GET /updates.json?_=1766726421309 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:20:21] code 404, message File not found
+::1 - - [25/Dec/2025 21:20:21] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:20:24] "GET /updates.json?_=1766726424044 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:20:24] code 404, message File not found
+::1 - - [25/Dec/2025 21:20:24] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:20:25] "GET /updates.json?_=1766726425484 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:20:25] code 404, message File not found
+::1 - - [25/Dec/2025 21:20:25] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:20:26] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:20:26] code 404, message File not found
+::1 - - [25/Dec/2025 21:20:26] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:20:26] code 404, message File not found
+::1 - - [25/Dec/2025 21:20:26] "GET /assets/NewtterLogo1.png HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:20:26] "GET /updates.json?_=1766726426749 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:20:27] code 404, message File not found
+::1 - - [25/Dec/2025 21:20:27] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:20:28] "GET /updates.json?_=1766726428069 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:20:28] code 404, message File not found
+::1 - - [25/Dec/2025 21:20:28] "GET /assets/logo.PNG HTTP/1.1" 404 -
+::1 - - [25/Dec/2025 21:23:45] "GET /index.html HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:45] "GET /style.css HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:45] "GET /assets/logo.PNG HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:45] "GET /assets/NewtterLogo1.png HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:45] "GET /script.js HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:45] "GET /assets/paw-cursor-brown.png HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:45] "GET /updates.json?_=1766726625160 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:45] "GET /index.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:23:45] "GET /updates.json?_=1766726625676 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:48] "GET /assets/pfp.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:48] "GET /updates.json?_=1766726628187 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:23:48] "GET /assets/newtheader.jpeg HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:24:00] "GET /gallery.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:24:00] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:24:00] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:24:00] "GET /updates.json?_=1766726640956 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:24:02] "GET /updates.json?_=1766726642209 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:24:09] "GET /updates.json?_=1766726649278 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:24:20] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:24:20] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:24:20] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:24:20] "GET /updates.json?_=1766726660791 HTTP/1.1" 200 -
+::1 - - [25/Dec/2025 21:24:46] "GET /updates.html HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:24:46] "GET /style.css HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:24:46] "GET /script.js HTTP/1.1" 304 -
+::1 - - [25/Dec/2025 21:24:46] "GET /updates.json?_=1766726686284 HTTP/1.1" 200 -
