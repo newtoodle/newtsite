@@ -574,6 +574,7 @@ function initWeightConverter(){
   });
   // make weigh-ins data-driven; order newest-first
   const weighIns = [
+    { date: '1/2/26', lbs: 4.9, note: '' },
     { date: '12/26/25', lbs: 4.7, note: '' },
     { date: '12/18/25', lbs: 4.5, note: '' },
     { date: '12/12/25', lbs: 4.2, note: '' },
