@@ -925,7 +925,9 @@ function initPhotoOfDay(){
     'assets/Newt6.jpeg',
     'assets/Newt7.jpeg',
     'assets/Newt8.jpeg',
-    'assets/Newt9.jpeg'
+    'assets/Newt9.jpeg',
+    'assets/gallery/newt11.jpeg',
+    'assets/gallery/newt12.jpeg'
   ];
   const daysSinceEpoch = Math.floor(Date.now() / (1000*60*60*24));
   const photoIndex = daysSinceEpoch % photoUrls.length;
