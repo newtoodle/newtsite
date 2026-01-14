@@ -574,7 +574,7 @@ function initWeightConverter(){
   });
   // make weigh-ins data-driven; order newest-first
   const weighIns = [
-    { date: '1/2/26', lbs: 4.9, note: '' },
+    { date: '1/9/26', lbs: 5.1, note: '' },
     { date: '12/26/25', lbs: 4.7, note: '' },
     { date: '12/18/25', lbs: 4.5, note: '' },
     { date: '12/12/25', lbs: 4.2, note: '' },
@@ -925,9 +925,7 @@ function initPhotoOfDay(){
     'assets/Newt6.jpeg',
     'assets/Newt7.jpeg',
     'assets/Newt8.jpeg',
-    'assets/Newt9.jpeg',
-    'assets/gallery/newt11.jpeg',
-    'assets/gallery/newt12.jpeg'
+    'assets/Newt9.jpeg'
   ];
   const daysSinceEpoch = Math.floor(Date.now() / (1000*60*60*24));
   const photoIndex = daysSinceEpoch % photoUrls.length;
