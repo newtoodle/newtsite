@@ -53,15 +53,34 @@ async function ensureFirebase(){
 
 function updateAge(){
   const now = new Date();
-  let diff = Math.max(0, now - BIRTH);
-  const msInSecond = 1000, msInMinute = msInSecond*60, msInHour = msInMinute*60, msInDay = msInHour*24;
-  const totalDays = Math.floor(diff / msInDay); diff -= totalDays*msInDay;
-  const weeks = Math.floor(totalDays / 7);
-  const days = totalDays % 7;
-  const hours = Math.floor(diff / msInHour); diff -= hours*msInHour;
-  const minutes = Math.floor(diff / msInMinute); diff -= minutes*msInMinute;
-  const seconds = Math.floor(diff / msInSecond);
-  const display = `${weeks} weeks, ${days} days, ${hours}h ${minutes}m ${seconds}s`;
+  let years = now.getFullYear() - BIRTH.getFullYear();
+  let months = now.getMonth() - BIRTH.getMonth();
+  let days = now.getDate() - BIRTH.getDate();
+  let hours = now.getHours() - BIRTH.getHours();
+  let minutes = now.getMinutes() - BIRTH.getMinutes();
+  let seconds = now.getSeconds() - BIRTH.getSeconds();
+
+  if (seconds < 0) { seconds += 60; minutes--; }
+  if (minutes < 0) { minutes += 60; hours--; }
+  if (hours < 0) { hours += 24; days--; }
+  if (days < 0) {
+    // Get days in previous month
+    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    days += prevMonth.getDate();
+    months--;
+  }
+  if (months < 0) { months += 12; years--; }
+
+  // Calculate weeks and remaining days
+  const weeks = Math.floor(days / 7);
+  const remDays = days % 7;
+
+  let display = '';
+  if (years > 0) display += `${years} year${years > 1 ? 's' : ''}, `;
+  display += `${months} month${months !== 1 ? 's' : ''}, `;
+  display += `${weeks} week${weeks !== 1 ? 's' : ''}, `;
+  display += `${remDays} day${remDays !== 1 ? 's' : ''}, `;
+  display += `${hours}h ${minutes}m ${seconds}s`;
   const el = document.getElementById('age-text'); if(el) el.textContent = display;
 }
 
@@ -574,6 +593,7 @@ function initWeightConverter(){
   });
   // make weigh-ins data-driven; order newest-first
   const weighIns = [
+    { date: '1/30/26', lbs: 5.8, note: '' },
     { date: '1/20/26', lbs: 5.46, note: 'at the vet' },
     { date: '1/16/26', lbs: 5.2, note: '' },
     { date: '1/9/26', lbs: 5.1, note: '' },
