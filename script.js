@@ -593,6 +593,8 @@ function initWeightConverter(){
   });
   // make weigh-ins data-driven; order newest-first
   const weighIns = [
+    { date: '2/20/26', lbs: 6.4, note: '' },
+    { date: '2/13/26', lbs: 6.3, note: '' },
     { date: '2/6/26', lbs: 6, note: '' },
     { date: '1/30/26', lbs: 5.8, note: '' },
     { date: '1/20/26', lbs: 5.46, note: 'at the vet' },
